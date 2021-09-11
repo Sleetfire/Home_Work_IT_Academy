@@ -1,4 +1,4 @@
-package home_work_2;
+package home_work_2.loops;
 
 //1.1. Перемножить числа от 1 до числа (включительно) введенного через аргумент к исполняемой программе.
 //Есть нюанс с переполнением, можно добавить проверки и сообщения пользователю. Пример: Ввели 5,
@@ -11,20 +11,40 @@ public class Loops11 {
 
     public static void main(String[] args) {
 
-        int iterator = Integer.parseInt(args[0]);
+        int iterator = 1;
+
+        try {
+
+            iterator = Integer.parseInt(args[0]);
+
+            if (iterator == 0) {
+
+                System.out.println("Вы ввели 0!");
+                return;
+
+            }
+
+        } catch (NumberFormatException e1) {
+
+            System.out.println("Неправильный формат числа!");
+            return;
+
+        }
 
         long result = 1;
         String str = "";
 
         for (int i = 1; i <= iterator; i++) {
 
-            result *= i;
+            try {
 
-            if (result > Integer.MAX_VALUE) {
+                result = Math.multiplyExact(result, i);
 
-                System.err.println("Переполнение! " + result);
+            } catch (ArithmeticException e1) {
 
+                System.out.println("Переполнение!");
                 return;
+
             }
 
             if (i == iterator) {
@@ -46,7 +66,6 @@ public class Loops11 {
     }
 
 //    1.1.2.* Используя рекурсию
-
     public static long factorial(int iterator) {
 
         String str = "";
@@ -60,6 +79,5 @@ public class Loops11 {
         return iterator * factorial(iterator - 1);
 
     }
-
 
 }

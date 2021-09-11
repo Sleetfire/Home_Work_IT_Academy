@@ -1,4 +1,4 @@
-package home_work_2;
+package home_work_2.loops;
 
 //1.2. Все цифры из числа введенного через аргумент к исполняемой программе перемножить между собой и вывести ход вычислений в консоль.
 //Пользователь обязан ввести целое число. Если ввели не целое, то выдать сообщение о том что пользователь ввёл некорректные данные.
@@ -44,7 +44,18 @@ public class Loops12 {
 
         while (number > 0) {
 
-            result *= number % 10;
+            int figure = number % 10;
+
+            try {
+
+                result = Math.multiplyExact(result, figure);
+
+            } catch (ArithmeticException e1) {
+
+                System.out.println("Переполнение!");
+                return;
+
+            }
 
             str += " * " + (number % 10);
 
