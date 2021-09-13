@@ -10,7 +10,7 @@ public class Loops11 {
 
     public static void main(String[] args) {
 
-        int iterator = 5;
+        int iterator = 1;
 
         try {
 
