@@ -26,7 +26,7 @@ public class ForEachOperation implements IArraysOperation {
 
         for (int i : array) {
 
-            if (counter % 2 == 0) {
+            if (counter % 2 != 0) {
 
                 System.out.print(i + " ");
 

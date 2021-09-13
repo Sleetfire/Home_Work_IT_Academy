@@ -29,7 +29,7 @@ public class DoWhileOperation implements IArraysOperation {
 
         do {
 
-            if (i % 2 == 0) {
+            if (i % 2 != 0) {
 
                 System.out.print(array[i] + " ");
 

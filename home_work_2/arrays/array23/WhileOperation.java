@@ -29,7 +29,7 @@ public class WhileOperation implements IArraysOperation {
 
         while (i < array.length) {
 
-            if (i % 2 == 0) {
+            if (i % 2 != 0) {
 
                 System.out.print(array[i] + " ");
             }

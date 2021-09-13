@@ -4,14 +4,13 @@ package home_work_2.loops;
 //Есть нюанс с переполнением, можно добавить проверки и сообщения пользователю. Пример: Ввели 5,
 //должно получиться в консоли: 1 * 2 * 3 * 4 * 5 = ответ
 
-
 //1.1.1. Используя только цикл
 
 public class Loops11 {
 
     public static void main(String[] args) {
 
-        int iterator = 1;
+        int iterator = 5;
 
         try {
 
@@ -59,16 +58,30 @@ public class Loops11 {
 
         System.out.println(str);
 
+        System.out.println('\n' + "Результат с использованием рекурсии: ");
+
         long factorialResult = factorial(iterator);
 
-        System.out.println('\n' + "Результат с использованием рекурсии: " + factorialResult);
+        System.out.print(factorialResult);
 
     }
 
-//    1.1.2.* Используя рекурсию
+    //    1.1.2.* Используя рекурсию
     public static long factorial(int iterator) {
 
         String str = "";
+
+        if (iterator != 1) {
+
+            str += iterator + " * ";
+
+        } else {
+
+            str += iterator + " = ";
+
+        }
+
+        System.out.print(str);
 
         if (iterator == 1) {
 
@@ -81,3 +94,4 @@ public class Loops11 {
     }
 
 }
+
