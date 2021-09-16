@@ -15,7 +15,7 @@ public class Array22 {
 
         //printAllElements();
 
-        //printAllSecondElement();
+        printAllSecondElement();
 
         //printReverseArray();
 
@@ -60,6 +60,7 @@ public class Array22 {
 
     }
 
+    // Так как нумерация массива начинается с 0, тогда каждый второй элемент массива будет иметь нечетный индекс
     public static void printAllSecondElement() {
 
         int[] array = arrayFromConsole();
@@ -67,7 +68,7 @@ public class Array22 {
         //for
         for (int i = 0; i < array.length; i++) {
 
-            if (i % 2 == 0) {
+            if (i % 2 != 0) {
 
                 System.out.print(array[i] + " ");
 
@@ -80,7 +81,7 @@ public class Array22 {
 //
 //        for (int i : array) {
 //
-//            if (counter % 2 == 0) {
+//            if (counter % 2 != 0) {
 //
 //                System.out.print(i + " ");
 //
@@ -95,7 +96,7 @@ public class Array22 {
 //
 //        while (i < array.length) {
 //
-//            if (i % 2 == 0) {
+//            if (i % 2 != 0) {
 //
 //                System.out.print(array[i] + " ");
 //            }
@@ -109,7 +110,7 @@ public class Array22 {
 //
 //        do {
 //
-//            if (i % 2 == 0) {
+//            if (i % 2 != 0) {
 //
 //                System.out.print(array[i] + " ");
 //
@@ -120,7 +121,6 @@ public class Array22 {
 //        } while (i < array.length);
 
     }
-
 
     public static void printReverseArray() {
 
