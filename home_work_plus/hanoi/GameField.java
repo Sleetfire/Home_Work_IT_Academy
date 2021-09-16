@@ -204,9 +204,152 @@ public class GameField {
 
     public boolean isWin(int[][] gameField) {
 
-        if (gameField[0][1] != 0 || gameField[0][2] != 0) return true;
+        if (gameField[0][1] != 0 || gameField[0][2] != 0) {
 
-        else return false;
+            return true;
+
+        } else {
+
+            return false;
+            
+        }
+
+    }
+
+    public int[][] addRobotRing(int[][] gameField, int command) {
+
+        int buf = 0;
+        int stemFrom = 0;
+        int stemTo = 0;
+
+        switch (command) {
+
+            case 1: {
+
+                stemFrom = 0;
+                stemTo = 1;
+
+            }
+            break;
+
+            case 2: {
+
+                stemFrom = 0;
+                stemTo = 2;
+
+            }
+            break;
+
+            case 3: {
+
+                stemFrom = 1;
+                stemTo = 0;
+
+            }
+            break;
+
+            case 4: {
+
+                stemFrom = 1;
+                stemTo = 2;
+
+            }
+            break;
+
+            case 5: {
+
+                stemFrom = 2;
+                stemTo = 0;
+
+            }
+            break;
+
+            case 6: {
+
+                stemFrom = 2;
+                stemTo = 1;
+
+            }
+            break;
+
+            default:
+                System.out.println("Error");
+
+        }
+
+        for (int i = 0; i < gameField.length; i++) {
+
+            if (gameField[i][stemFrom] != 0) {
+
+                buf = gameField[i][stemFrom];
+
+                break;
+
+            }
+        }
+
+        for (int i = gameField.length - 1; i >= 0; i--) {
+
+            if (gameField[i][stemTo] == 0 && buf != 0) {
+
+                gameField[i][stemTo] = buf;
+                break;
+
+            } else if (gameField[i][stemTo] > buf) {
+
+                continue;
+
+            } else {
+
+                command = reverseCommand(command);
+
+                gameField = addRing(gameField, command);
+
+                return gameField;
+
+            }
+
+        }
+
+        deleteRing(gameField, command);
+
+        return gameField;
+    }
+
+    public int reverseCommand(int command) {
+
+        switch (command) {
+
+            case 1:
+                command = 3;
+                break;
+
+            case 2:
+                command = 5;
+                break;
+
+            case 3:
+                command = 1;
+                break;
+
+            case 4:
+                command = 6;
+                break;
+
+            case 5:
+                command = 2;
+                break;
+
+            case 6:
+                command = 4;
+                break;
+
+            default:
+                command = 1;
+
+        }
+
+        return command;
 
     }
 

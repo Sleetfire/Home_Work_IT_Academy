@@ -89,4 +89,65 @@ public class User {
         return answer;
     }
 
+    public int selectRobotMode() {
+
+        Scanner scanner = new Scanner(System.in);
+
+        int robotMode = 0;
+
+        do {
+
+            System.out.println("Выберите режим игры робота: \n1 - Робот умеет играть в эту игру \n2 - Робот полный нубас");
+
+            try {
+
+                robotMode = scanner.nextInt();
+
+            } catch (InputMismatchException e1) {
+
+                System.err.println("Проверьте правильность ввода режима игры робота!");
+
+                System.exit(0);
+
+            }
+
+        } while (robotMode < 1 || robotMode > 2);
+
+        return robotMode;
+
+    }
+
+    public void toUserPlay() {
+
+        int counter = 0;
+
+        User user = new User();
+
+        GameField gameField = new GameField();
+
+        int[][] arr = gameField.createNewGameField();
+
+        do {
+
+            gameField.showGameField(arr);
+
+            int command = user.selectCommand();
+
+            gameField.addRing(arr, command);
+
+            counter++;
+
+        } while (!gameField.isWin(arr));
+
+        gameField.showGameField(arr);
+
+        System.out.println("Вы победили! ");
+        System.out.println("Было произведено " + counter + " шагов!");
+
+    }
+
 }
+
+
+
+
