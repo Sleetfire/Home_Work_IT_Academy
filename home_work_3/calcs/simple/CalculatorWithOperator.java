@@ -27,12 +27,32 @@ public class CalculatorWithOperator implements ICalculator {
     //возведение в степень
     public double getDegree(double a, int b) {
 
+        if (b == 1) {
+            return 1;
+        }
+
         double result = a;
 
-        while (b > 1) {
+        if (b > 0) {
 
-            result *= a;
-            b--;
+            while (b > 1) {
+
+                result *= a;
+                b--;
+
+            }
+
+        } else {
+            b *= -1;
+
+            while (b > 1) {
+
+                result *= a;
+                b--;
+
+            }
+
+            result = 1 / result;
 
         }
 
@@ -47,7 +67,7 @@ public class CalculatorWithOperator implements ICalculator {
 
     }
 
-    //квадратный корень
+    //квадратный корень (Итерационная формула Герона)
     public double getSquareRoot(double a) {
 
         double x = a;

@@ -4,7 +4,7 @@ import home_work_3.calcs.api.ICalculator;
 
 import java.util.Objects;
 
-public class CalculatorWithCounterAutoCompositeInterface {
+public class CalculatorWithCounterAutoDecorator implements ICalculator{
 
     private long countOperation;
 
@@ -15,7 +15,7 @@ public class CalculatorWithCounterAutoCompositeInterface {
         return countOperation;
     }
 
-    public ICalculator getICalculator() {
+    public ICalculator getCalculator() {
 
         return iCalculator;
     }
@@ -25,7 +25,7 @@ public class CalculatorWithCounterAutoCompositeInterface {
         countOperation++;
     }
 
-    public CalculatorWithCounterAutoCompositeInterface(ICalculator iCalculator) {
+    public CalculatorWithCounterAutoDecorator(ICalculator iCalculator) {
         this.iCalculator = iCalculator;
 
     }
@@ -46,6 +46,7 @@ public class CalculatorWithCounterAutoCompositeInterface {
     }
 
     public double sum(double a, double b) {
+
         incrementCountOperation();
         return iCalculator.sum(a, b);
     }
@@ -71,7 +72,7 @@ public class CalculatorWithCounterAutoCompositeInterface {
 
         if (o == null || getClass() != o.getClass()) return false;
 
-        CalculatorWithCounterAutoCompositeInterface that = (CalculatorWithCounterAutoCompositeInterface) o;
+        CalculatorWithCounterAutoDecorator that = (CalculatorWithCounterAutoDecorator) o;
         return countOperation == that.countOperation && Objects.equals(iCalculator, that.iCalculator);
     }
 
@@ -84,7 +85,7 @@ public class CalculatorWithCounterAutoCompositeInterface {
 
     @Override
     public String toString() {
-        return "CalculatorWithCounterAutoCompositeInterface {" +
+        return "CalculatorWithCounterAutoDecorator {" +
                 "countOperation=" + countOperation +
                 ", iCalculator=" + iCalculator +
                 "}";

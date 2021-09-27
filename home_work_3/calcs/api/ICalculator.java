@@ -17,6 +17,4 @@ public interface ICalculator {
     double getSquareRoot(double a);
 
 
-
-
 }
