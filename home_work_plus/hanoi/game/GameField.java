@@ -1,5 +1,10 @@
 package game;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+
 public class GameField {
 
     private int[][] gameField;
@@ -240,6 +245,47 @@ public class GameField {
             return false;
 
         }
+
+    }
+
+    public void writeInFile(String name, int counter, String filename) throws IOException {
+
+        BufferedWriter outWriter = new BufferedWriter(new FileWriter(filename, true));
+
+        LocalDate date = LocalDate.now();
+
+        String playerInfo = "Player: " + name;
+        String countSteps = "Steps: " + counter;
+        String dateInfo = "Date: " + date.getDayOfMonth() + " " + date.getMonth() + " " + date.getYear();
+
+        outWriter.newLine();
+        outWriter.write(playerInfo);
+        outWriter.newLine();
+        outWriter.write(countSteps);
+        outWriter.newLine();
+        outWriter.write(dateInfo);
+        outWriter.newLine();
+
+        for (int i = 0; i < gameField.length; i++) {
+
+            outWriter.newLine();
+
+            for (int j = 0; j < gameField[i].length; j++) {
+
+                if (gameField[i][j] == 0) {
+
+                    outWriter.write("*" + " ");
+
+                } else outWriter.write(gameField[i][j] + " ");
+
+            }
+
+        }
+
+        outWriter.newLine();
+        outWriter.write("-------------------------");
+        outWriter.flush();
+        outWriter.close();
 
     }
 

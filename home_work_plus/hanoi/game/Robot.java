@@ -1,10 +1,11 @@
 package game;
 
+import java.io.IOException;
 import java.util.Random;
 
 public class Robot {
 
-    public void robotPlay(Menu menu, int rings, int stems) {
+    public void robotPlay(Menu menu, int rings, int stems) throws IOException {
 
         int robotMode = menu.selectRobotMode();
 
@@ -23,7 +24,6 @@ public class Robot {
         }
 
     }
-
 
     public int reverseCommand(int command) {
 
@@ -70,7 +70,7 @@ public class Robot {
 
     }
 
-    public void robotNoobPlay(Menu menu, GameField gameField) {
+    public void robotNoobPlay(Menu menu, GameField gameField) throws IOException {
 
         int counter = 0;
 
@@ -80,28 +80,24 @@ public class Robot {
 
             boolean result = gameField.addRing(command);
 
-            if (result) {
-
-                gameField.showGameField();
-
-                counter++;
-
-            } else {
+            if (!result) {
 
                 command = reverseCommand(command);
                 gameField.addRing(command);
-                gameField.showGameField();
-                counter++;
 
             }
+            gameField.showGameField();
+            counter++;
 
         } while (!gameField.isWin());
 
         menu.printResult(counter);
 
+        gameField.writeInFile("RobotNoob", counter, "result.txt");
+
     }
 
-    public void robotProPlayer(Menu menu, GameField gameField) {
+    public void robotProPlayer(Menu menu, GameField gameField) throws IOException {
 
         int counter = 0;
 
@@ -176,6 +172,8 @@ public class Robot {
         } while (true);
 
         menu.printResult(counter);
+
+        gameField.writeInFile("RobotPro", counter, "result.txt");
 
     }
 

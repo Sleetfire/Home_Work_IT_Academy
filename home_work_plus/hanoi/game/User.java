@@ -1,8 +1,10 @@
 package game;
 
+import java.io.IOException;
+
 public class User {
 
-    public void userPlay (Menu menu, int rings, int stems) {
+    public void userPlay(Menu menu, int rings, int stems) throws IOException {
 
         int counter = 0;
 
@@ -12,7 +14,7 @@ public class User {
 
         do {
 
-            int command = menu.selectUserCommand();
+            int command = menu.selectUserCommand(gameField, counter);
 
             boolean result = gameField.addRing(command);
 
@@ -35,9 +37,12 @@ public class User {
 
         menu.printResult(counter);
 
-        }
+        menu.toExitGame(gameField, counter);
+
 
     }
+
+}
 
 
 

@@ -1,5 +1,6 @@
 package game;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -60,7 +61,7 @@ public class Menu {
         return rings;
     }
 
-    public int selectUserCommand() {
+    public int selectUserCommand(GameField gameField, int counter) throws IOException {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -71,6 +72,7 @@ public class Menu {
             System.out.println("Выберите откуда и куда вы хотите переместить диск: ");
             System.out.println("1 -->> 2 (1)   2 -->> 1 (3)   3 -->> 1 (5)");
             System.out.println("1 -->> 3 (2)   2 -->> 3 (4)   3 -->> 2 (6)");
+            System.out.println("Чтобы покинуть игру, введите не цифру!");
 
             try {
 
@@ -78,13 +80,46 @@ public class Menu {
 
             } catch (InputMismatchException e1) {
 
-                System.err.println("Проверьте правильность ввода направления перемещения диска!");
-                System.exit(0);
+                toExitGame(gameField, counter);
+
             }
 
         } while (answer < 1 || answer > 6);
 
         return answer;
+
+    }
+
+    public void toExitGame (GameField gameField, int counter) throws IOException {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.err.println("Хотите сохранить игру?\n1 - Да\n2 - Нет");
+
+        try {
+
+            int result = scanner.nextInt();
+
+            if (result == 1) {
+
+                System.out.println("Введите ваше имя:");
+                String name = scanner.next();
+
+                gameField.writeInFile(name, counter,"result.txt");
+
+            } else {
+
+                System.err.println("Игра завершена без сохранений");
+
+            }
+            System.exit(0);
+
+        } catch (InputMismatchException e1) {
+
+            System.err.println("Вы даже это не смогли нормально сделать!");
+            System.exit(0);
+
+        }
 
     }
 
