@@ -13,7 +13,18 @@ public class DataContainer<T> {
 
     }
 
+    /**
+     *
+     * @param item
+     * @return index added item
+     */
     public int add(T item) {
+
+        if (item == null) {
+
+            return -1;
+
+        }
 
         int index;
 
@@ -22,11 +33,18 @@ public class DataContainer<T> {
             data = expandArray();
 
         }
+
         index = dataFill(item);
 
         return index;
+
     }
 
+    /**
+     *
+     * @param index
+     * @return item by index
+     */
     public T get(int index) {
 
         if (isEmpty()) {
@@ -47,12 +65,22 @@ public class DataContainer<T> {
 
     }
 
+    /**
+     *
+     * @return item's array
+     */
     public T[] getItems() {
 
         return data;
 
     }
 
+
+    /**
+     * delete item by index
+     * @param index
+     * @return true if item was deleted, and false if item was not deleted
+     */
     public boolean delete(int index) {
 
         try {
@@ -82,6 +110,11 @@ public class DataContainer<T> {
 
     }
 
+    /**
+     * delete item by item
+     * @param item
+     * @return true if item was deleted, and false if item was not deleted
+     */
     public boolean delete(T item) {
 
         for (int i = 0; i < data.length; i++) {
@@ -97,6 +130,10 @@ public class DataContainer<T> {
 
     }
 
+    /**
+     * sorting data array by comparator
+     * @param comparator
+     */
     public void sort(Comparator<T> comparator) {
 
         for (int i = 0; i < data.length; i++) {
@@ -115,6 +152,52 @@ public class DataContainer<T> {
 
         }
 
+    }
+
+    public static <T extends Comparable<T>> DataContainer<T> sort(DataContainer<T>  dataContainer){
+
+        for (int i = 0; i < dataContainer.getItems().length; i++) {
+
+            for (int j = 0; j < dataContainer.getItems().length - i - 1; j++) {
+
+                if (dataContainer.getItems()[j].compareTo(dataContainer.getItems()[j + 1]) > 0) {
+
+                    T buf = dataContainer.getItems()[j];
+                    dataContainer.getItems()[j] = dataContainer.getItems()[j + 1];
+                    dataContainer.getItems()[j + 1] = buf;
+
+                }
+
+            }
+
+        }
+
+        return dataContainer;
+    }
+
+    /**
+     * sorting data array
+     * @param dataContainer
+     * @param comparator
+     * @param <T>
+     */
+    public static <T> void sort(DataContainer<T> dataContainer, Comparator comparator) {
+
+        for (int i = 0; i < dataContainer.getItems().length; i++) {
+
+            for (int j = 0; j < dataContainer.getItems().length - i - 1; j++) {
+
+                if (comparator.compare(dataContainer.getItems()[j], dataContainer.getItems()[j + 1]) > 0) {
+
+                    T buf = dataContainer.getItems()[j];
+                    dataContainer.getItems()[j] = dataContainer.getItems()[j + 1];
+                    dataContainer.getItems()[j + 1] = buf;
+
+                }
+
+            }
+
+        }
 
     }
 
@@ -131,22 +214,15 @@ public class DataContainer<T> {
 
     private boolean isEmpty() {
 
-        if (data.length == 0) {
-
-            return true;
-
-        } else {
-
-            return false;
-        }
+        return data.length == 0;
 
     }
 
     private boolean isFull() {
 
-        for (int i = 0; i < data.length; i++) {
+        for (T datum : data) {
 
-            if (data[i] == null) {
+            if (datum == null) {
 
                 return false;
 
@@ -175,30 +251,22 @@ public class DataContainer<T> {
 
     }
 
-    public void printData() {
+    @Override
+    public String toString() {
 
-        for (int i = 0; i < data.length; i++) {
+        String str = "";
 
-            System.out.print(data[i].toString() + " ");
+        for (T datum : data) {
+
+            if (datum != null) {
+
+                str += datum + " ";
+
+            }
 
         }
 
-    }
+        return str;
 
-    @Override
-    public boolean equals(Object o) {
-
-        if (this == o) return true;
-
-        if (o == null || getClass() != o.getClass()) return false;
-
-        DataContainer<?> that = (DataContainer<?>) o;
-
-        return Arrays.equals(data, that.data);
-    }
-
-    @Override
-    public int hashCode() {
-        return Arrays.hashCode(data);
     }
 }
