@@ -12,19 +12,13 @@ public class DataContainerMain {
 
         DataContainer<String> container = new DataContainer<>(new String[10]);
 
-        container3.add(new Student("pudge", 50));
-        container3.add(new Student("invoker", 100_000));
-        container3.add(new Student("anti-mage", 30));
-        container3.add(new Student("storm spirit", 35));
+        container3.add(new Student("alex", 50));
+        container3.add(new Student("andrey", 100_000));
+        container3.add(new Student("kill_real", 30));
+        container3.add(new Student("max", 35));
 
         DataContainer.sort(container3);
         System.out.println(container3.toString());
-       // System.out.println((container3.getItems().length));
-
-
-
-
-
 
 
   }
