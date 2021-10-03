@@ -17,7 +17,7 @@ public class Student implements Comparable <Student>{
         return age;
     }
 
-    public void setAge(byte age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
@@ -36,6 +36,6 @@ public class Student implements Comparable <Student>{
 
     @Override
     public int compareTo(Student o) {
-        return name.compareTo(o.getName());
+        return this.name.compareTo(o.getName());
     }
 }

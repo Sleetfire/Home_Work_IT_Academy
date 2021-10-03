@@ -14,7 +14,6 @@ public class DataContainer<T> {
     }
 
     /**
-     *
      * @param item
      * @return index added item
      */
@@ -41,7 +40,6 @@ public class DataContainer<T> {
     }
 
     /**
-     *
      * @param index
      * @return item by index
      */
@@ -66,18 +64,15 @@ public class DataContainer<T> {
     }
 
     /**
-     *
      * @return item's array
      */
-    public T[] getItems() {
-
-        return data;
-
+    public T[]  getItems() {
+        return this.data;
     }
-
 
     /**
      * delete item by index
+     *
      * @param index
      * @return true if item was deleted, and false if item was not deleted
      */
@@ -112,6 +107,7 @@ public class DataContainer<T> {
 
     /**
      * delete item by item
+     *
      * @param item
      * @return true if item was deleted, and false if item was not deleted
      */
@@ -125,13 +121,12 @@ public class DataContainer<T> {
             }
 
         }
-
         return false;
-
     }
 
     /**
      * sorting data array by comparator
+     *
      * @param comparator
      */
     public void sort(Comparator<T> comparator) {
@@ -154,7 +149,7 @@ public class DataContainer<T> {
 
     }
 
-    public static <T extends Comparable<T>> DataContainer<T> sort(DataContainer<T>  dataContainer){
+    public static <T extends Comparable <T>> void sort(DataContainer<T> dataContainer) {
 
         for (int i = 0; i < dataContainer.getItems().length; i++) {
 
@@ -167,16 +162,14 @@ public class DataContainer<T> {
                     dataContainer.getItems()[j + 1] = buf;
 
                 }
-
             }
-
         }
-
-        return dataContainer;
+        //return dataContainer;
     }
 
     /**
      * sorting data array
+     *
      * @param dataContainer
      * @param comparator
      * @param <T>
@@ -194,11 +187,8 @@ public class DataContainer<T> {
                     dataContainer.getItems()[j + 1] = buf;
 
                 }
-
             }
-
         }
-
     }
 
     private T[] expandArray() {

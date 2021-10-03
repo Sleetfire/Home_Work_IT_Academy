@@ -8,13 +8,9 @@ public class DataContainerMain {
 
     public static void main(String[] args) {
 
-        Integer [] a = {9, 4, 6, null, 11};
-
-        DataContainer<String> container1 = new DataContainer<>(new String[0]);
-
-        DataContainer<Integer> container2 = new DataContainer<>(a);
-
         DataContainer<Student> container3 = new DataContainer<>(new Student[0]);
+
+        DataContainer<String> container = new DataContainer<>(new String[10]);
 
         container3.add(new Student("pudge", 50));
         container3.add(new Student("invoker", 100_000));
@@ -23,6 +19,7 @@ public class DataContainerMain {
 
         DataContainer.sort(container3);
         System.out.println(container3.toString());
+       // System.out.println((container3.getItems().length));
 
 
 
