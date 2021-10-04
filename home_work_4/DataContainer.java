@@ -1,9 +1,11 @@
 package home_work_4;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import home_work_4.iterators.DataContainerIterator;
 
-public class DataContainer<T> {
+import java.util.Comparator;
+import java.util.Iterator;
+
+public class DataContainer<T> implements Iterable<T> {
 
     private T[] data;
 
@@ -66,7 +68,7 @@ public class DataContainer<T> {
     /**
      * @return item's array
      */
-    public T[]  getItems() {
+    public T[] getItems() {
         return this.data;
     }
 
@@ -142,14 +144,11 @@ public class DataContainer<T> {
                     data[j + 1] = buf;
 
                 }
-
             }
-
         }
-
     }
 
-    public static <T extends Comparable <T>> void sort(DataContainer<T> dataContainer) {
+    public static <T extends Comparable<T>> void sort(DataContainer<T> dataContainer) {
 
         for (int i = 0; i < dataContainer.getItems().length; i++) {
 
@@ -253,10 +252,13 @@ public class DataContainer<T> {
                 str += datum + " ";
 
             }
-
         }
-
         return str;
-
     }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new DataContainerIterator(data);
+    }
+
 }
