@@ -1,5 +1,7 @@
 package home_work_4.dto;
 
+import java.util.Objects;
+
 public class Student implements Comparable <Student>{
 
     private String name;
@@ -37,5 +39,20 @@ public class Student implements Comparable <Student>{
     @Override
     public int compareTo(Student o) {
         return this.name.compareTo(o.getName());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return age == student.age && Objects.equals(name, student.name);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name == null ? 0 : name.hashCode();
+        result += 31 * age;
+        return result;
     }
 }
