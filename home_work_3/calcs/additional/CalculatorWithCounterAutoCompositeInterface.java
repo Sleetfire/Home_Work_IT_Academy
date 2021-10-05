@@ -11,17 +11,14 @@ public class CalculatorWithCounterAutoCompositeInterface {
     ICalculator iCalculator;
 
     public long getCountOperation() {
-
         return countOperation;
     }
 
     public ICalculator getICalculator() {
-
         return iCalculator;
     }
 
     public void incrementCountOperation() {
-
         countOperation++;
     }
 
@@ -68,9 +65,7 @@ public class CalculatorWithCounterAutoCompositeInterface {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-
         if (o == null || getClass() != o.getClass()) return false;
-
         CalculatorWithCounterAutoCompositeInterface that = (CalculatorWithCounterAutoCompositeInterface) o;
         return countOperation == that.countOperation && Objects.equals(iCalculator, that.iCalculator);
     }

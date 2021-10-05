@@ -37,171 +37,95 @@ public class CalculatorWithCounterAutoComposite {
     }
 
     public double divide(double a, double b) {
-
         double result;
-
         if (calculatorWithOperator != null) {
-
             result = calculatorWithOperator.divide(a, b);
-
         } else if (calculatorWithMathCopy != null) {
-
             result = calculatorWithMathCopy.divide(a, b);
-
         } else {
-
             result = calculatorWithMathExtends.divide(a, b);
-
         }
-
         incrementCountOperation();
-
         return result;
-
     }
 
     public double multiply(double a, double b) {
-
         double result;
-
         if (calculatorWithOperator != null) {
-
             result = calculatorWithOperator.multiply(a, b);
-
         } else if (calculatorWithMathCopy != null) {
-
             result = calculatorWithMathCopy.multiply(a, b);
-
         } else {
-
             result = calculatorWithMathExtends.multiply(a, b);
-
         }
-
         incrementCountOperation();
-
         return result;
 
     }
 
     public double subtract(double a, double b) {
-
         double result;
-
         if (calculatorWithOperator != null) {
-
             result = calculatorWithOperator.subtract(a, b);
-
         } else if (calculatorWithMathCopy != null) {
-
             result = calculatorWithMathCopy.subtract(a, b);
-
         } else {
-
             result = calculatorWithMathExtends.subtract(a, b);
-
         }
-
         incrementCountOperation();
-
         return result;
-
     }
 
     public double sum(double a, double b) {
-
         double result;
-
         if (calculatorWithOperator != null) {
-
             result = calculatorWithOperator.sum(a, b);
-
         } else if (calculatorWithMathCopy != null) {
-
             result = calculatorWithMathCopy.sum(a, b);
-
         } else {
-
             result = calculatorWithMathExtends.sum(a, b);
-
         }
-
         incrementCountOperation();
-
         return result;
-
     }
 
     public double getDegree(double a, int b) {
-
         double result;
-
         if (calculatorWithOperator != null) {
-
             result = calculatorWithOperator.getDegree(a, b);
-
         } else if (calculatorWithMathCopy != null) {
-
             result = calculatorWithMathCopy.getDegree(a, b);
-
         } else {
-
             result = calculatorWithMathExtends.getDegree(a, b);
-
         }
-
         incrementCountOperation();
-
         return result;
-
     }
 
     public double getModule(double a) {
-
         double result;
-
         if (calculatorWithOperator != null) {
-
             result = calculatorWithOperator.getModule(a);
-
         } else if (calculatorWithMathCopy != null) {
-
             result = calculatorWithMathCopy.getModule(a);
-
         } else {
-
             result = calculatorWithMathExtends.getModule(a);
-
         }
-
         incrementCountOperation();
-
         return result;
-
     }
 
     public double getSquareRoot(double a) {
-
         double result;
-
         if (calculatorWithOperator != null) {
-
             result = calculatorWithOperator.getSquareRoot(a);
-
         } else if (calculatorWithMathCopy != null) {
-
             result = calculatorWithMathCopy.getSquareRoot(a);
-
         } else {
-
             result = calculatorWithMathExtends.getSquareRoot(a);
-
         }
-
         incrementCountOperation();
-
         return result;
-
     }
 
     @Override

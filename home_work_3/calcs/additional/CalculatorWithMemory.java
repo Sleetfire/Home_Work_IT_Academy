@@ -15,30 +15,25 @@ public class CalculatorWithMemory {
     private double result;
 
     public double getMemory() {
-
         double timeMemory = this.memory;
         this.memory = 0;
         return timeMemory;
     }
 
     public long getCountOperation() {
-
         return countOperation;
     }
 
     public ICalculator getICalculator() {
-
         return iCalculator;
     }
 
     public void incrementCountOperation() {
-
         countOperation++;
     }
 
     public CalculatorWithMemory(ICalculator iCalculator) {
         this.iCalculator = iCalculator;
-
     }
 
     public double divide(double a, double b) {
@@ -93,7 +88,6 @@ public class CalculatorWithMemory {
     public void writeInMemory() {
         this.memory = this.result;
         this.result = 0;
-
     }
 
     @Override
@@ -108,14 +102,11 @@ public class CalculatorWithMemory {
 
     @Override
     public int hashCode() {
-
         int resultH = iCalculator == null ? 0 : iCalculator.hashCode();
         resultH += 31 * (int) countOperation;
         resultH += 31 * memory;
         resultH += 31 * result;
-
         return resultH;
-
     }
 
     @Override

@@ -11,17 +11,14 @@ public class CalculatorWithCounterAutoDecorator implements ICalculator{
     ICalculator iCalculator;
 
     public long getCountOperation() {
-
         return countOperation;
     }
 
     public ICalculator getCalculator() {
-
         return iCalculator;
     }
 
     public void incrementCountOperation() {
-
         countOperation++;
     }
 
@@ -69,9 +66,7 @@ public class CalculatorWithCounterAutoDecorator implements ICalculator{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-
         if (o == null || getClass() != o.getClass()) return false;
-
         CalculatorWithCounterAutoDecorator that = (CalculatorWithCounterAutoDecorator) o;
         return countOperation == that.countOperation && Objects.equals(iCalculator, that.iCalculator);
     }

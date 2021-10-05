@@ -8,17 +8,11 @@ import home_work_3.calcs.simple.CalculatorWithMathExtends;
 public class CalculatorDecoratorMain {
 
     public static void main(String[] args) {
-
         ICalculator calculator = new CalculatorWithCounterAutoDecorator(new CalculatorWithMemoryDecorator(new CalculatorWithMathExtends()));
-
         if (calculator instanceof CalculatorWithCounterAutoDecorator) {
-
             CalculatorWithCounterAutoDecorator calc = (CalculatorWithCounterAutoDecorator) calculator;
-
             if (calc.getCalculator() instanceof CalculatorWithMemoryDecorator) {
-
                 CalculatorWithMemoryDecorator memoryCalc = (CalculatorWithMemoryDecorator) calc.getCalculator();
-
                 calc.divide(28, 5);
                 memoryCalc.writeInMemory();
                 calc.getDegree(memoryCalc.getMemory(), 2);
@@ -29,11 +23,7 @@ public class CalculatorDecoratorMain {
                 memoryCalc.writeInMemory();
                 System.out.println("Было выполнено " + calc.getCountOperation() + " операций");
                 System.out.println("Последнее значение в памяти (результат всех вычислений): " + memoryCalc.getMemory());
-
             }
-
         }
-
     }
-
 }
