@@ -9,70 +9,38 @@ package home_work_2.loops;
 public class Loops12 {
 
     public static void main(String[] args) {
-
         String argument = args[0];
-
         int number;
-
         int result = 1;
-
         String str = "";
-
         try {
-
             number = Integer.parseInt(argument);
-
         } catch (NumberFormatException e1) {
-
             try {
-
                 double doubleNumber = Double.parseDouble(argument);
-
                 System.out.println("Введено не целое число: " + doubleNumber);
-
                 return;
-
             } catch (NumberFormatException e2) {
-
                 System.out.println("Введено не число: " + argument);
-
                 return;
-
             }
-
         }
 
         while (number > 0) {
-
             int figure = number % 10;
-
             try {
-
                 result = Math.multiplyExact(result, figure);
-
             } catch (ArithmeticException e1) {
-
                 System.out.println("Переполнение!");
                 return;
-
             }
-
             str += " * " + (number % 10);
-
             number /= 10;
-
         }
-
         StringBuilder stringBuilder = new StringBuilder(str);
-
         stringBuilder.setCharAt(1, '=');
-
         stringBuilder.reverse();
-
         str = stringBuilder.toString() + result;
-
         System.out.println(str);
-
     }
-
 }

@@ -12,61 +12,36 @@ import java.util.Scanner;
 public class Loops13 {
 
     public static void main(String[] args) {
-
         Scanner scanner = new Scanner(System.in);
-
         double number = 0;
         int degree = 0;
-
         System.out.println("Введите число, если дробное, использовать ',' вместо '.' ");
-
         try {
-
             number = scanner.nextDouble();
-
         } catch (InputMismatchException e1) {
-
             System.out.println("Вы ввели не число!");
             return;
-
         }
-
         double result = number;
-
         System.out.println("Введите степень числа");
-
         try {
-
             degree = scanner.nextInt();
-
             if (degree < 0) {
-
                 System.out.println("Вы ввели отрицательную степень!");
                 return;
-
             }
-
         } catch (InputMismatchException e2) {
-
             System.out.println("Вы ввели некорректное число!");
             return;
-
         }
-
         if (degree == 0) {
-
             System.out.println(number + " ^ " + degree + " = 1" );
             return;
-
         }
-
         for (int i = 1; i < degree; i++) {
-
             result *= result;
-
         }
 
         System.out.println(number + " ^ " + degree + " = " + result);
-
     }
 }

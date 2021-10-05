@@ -23,7 +23,6 @@ import static home_work_2.utils.ArrayUtils.arrayRandom;
 public class SortsUtils {
 
     public static void main(String[] args) {
-
         //bubbleSort(new int[] {1,2,3,4,5,6});
         //bubbleSort(new int[] {1,1,1,1});
         //bubbleSort(new int[] {9,1,5,99,9,9});
@@ -37,85 +36,51 @@ public class SortsUtils {
         //shakerSort(new int[] {});
         //shakerSort(arrayRandom(10, 100));
         //shakerSort(arrayFromConsole());
-
     }
 
     //4.2.1. Пузырьковая сортировка
     public static void bubbleSort(int[] array) {
-
         System.out.println("Массив имеет следующий вид: ");
-
         System.out.println(Arrays.toString(array));
-
         for (int i = 0; i < array.length; i++) {
-
             for (int j = 0; j < array.length - i - 1; j++) {
-
                 if (array[j] > array[j + 1]) {
-
                     int buf = array[j];
                     array[j] = array[j + 1];
                     array[j + 1] = buf;
-
                 }
-
             }
-
         }
-
         System.out.println("Отсортированный массив имеет следующий вид: ");
-
         System.out.println(Arrays.toString(array));
-
     }
 
     //4.2.2. Шейкерная сортировка
     public static void shakerSort(int[] array) {
-
         System.out.println("Массив имеет следующий вид: ");
-
         System.out.println(Arrays.toString(array));
-
         int leftCount = 0;
         int rightCount = array.length - 1;
-
         int buf;
-
     do {
-
             for (int i = leftCount; i < rightCount; i++) {
-
                 if (array[i] > array[i + 1]) {
-
                     buf = array[i];
                     array[i] = array[i + 1];
                     array[i + 1] = buf;
-
                 }
-
             }
             rightCount--;
-
             for (int i = rightCount; i > leftCount; i--) {
-
                 if (array[i] < array[i - 1]) {
-
                     buf = array[i];
                     array[i] = array[i - 1];
                     array[i - 1] = buf;
-
                 }
-
             }
-
             leftCount++;
-
         } while (leftCount < rightCount);
-
         System.out.println("Отсортированный массив имеет следующий вид: ");
-
         System.out.println(Arrays.toString(array));
-
     }
-
 }

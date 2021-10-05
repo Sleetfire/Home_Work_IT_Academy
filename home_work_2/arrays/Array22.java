@@ -12,162 +12,107 @@ import static home_work_2.utils.ArrayUtils.arrayFromConsole;
 public class Array22 {
 
     public static void main(String[] args) {
-
         //printAllElements();
-
         printAllSecondElement();
-
         //printReverseArray();
 
     }
 
     public static void printAllElements() {
-
         int[] array = arrayFromConsole();
-
         //foreach
         for (int i : array) {
-
             System.out.print(i + " ");
-
         }
 
         //for
 //        for (int i = 0; i < array.length; i++ ) {
-//
 //            System.out.print(array[i] + " ");
-//
 //        }
 
         //while
 //        int i = 0;
 //
 //        while (i < array.length) {
-//
 //            System.out.print(array[i] + " ");
 //            i++;
-//
 //        }
 
         //do...while
 //        i = 0;
-////        do {
-////
-////            System.out.print(array[i] + " ");
-////            i++;
-////
-////        } while (i < array.length);
-
+//        do {
+//           System.out.print(array[i] + " ");
+//            i++;
+//        } while (i < array.length);
     }
 
     // Так как нумерация массива начинается с 0, тогда каждый второй элемент массива будет иметь нечетный индекс
     public static void printAllSecondElement() {
-
         int[] array = arrayFromConsole();
-
         //for
         for (int i = 0; i < array.length; i++) {
-
             if (i % 2 != 0) {
-
                 System.out.print(array[i] + " ");
-
             }
-
         }
 
         //foreach
 //        int counter = 0;
-//
 //        for (int i : array) {
-//
 //            if (counter % 2 != 0) {
-//
 //                System.out.print(i + " ");
-//
 //            }
-//
 //            counter++;
-//
 //        }
 
         //while
 //        int i = 0;
 //
 //        while (i < array.length) {
-//
 //            if (i % 2 != 0) {
-//
 //                System.out.print(array[i] + " ");
 //            }
-//
-//            i++;
-//
+//i++;
 //        }
 
         //do...while
 //        i = 0;
-//
 //        do {
-//
 //            if (i % 2 != 0) {
-//
 //                System.out.print(array[i] + " ");
-//
 //            }
-//
 //            i++;
-//
 //        } while (i < array.length);
-
     }
 
     public static void printReverseArray() {
-
         int[] array = arrayFromConsole();
-
         //for
         for (int i = array.length - 1; i >= 0; i--) {
-
             System.out.print(array[i] + " ");
-
         }
 
         //foreach
 //        int counter = array.length - 1;
-//
 //        for (int i : array) {
-//
 //            System.out.print(array[counter] + " ");
-//
 //            counter--;
-//
 //        }
 
         //do...while
 //        int i = array.length - 1;
-//
 //        do {
-//
 //            System.out.print(array[i] + " ");
-//
 //            i--;
-//
 //        } while (i >= 0);
 
         //while
 //        i = array.length - 1;
-//
 //        while (i >= 0) {
-//
 //            System.out.print(array[i] + " ");
-//
 //            i--;
-//
 //        }
-
     }
-
 }
 
 
