@@ -1,8 +1,9 @@
 package home_work_4.iterators;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
-public class DataContainerIterator<T> implements Iterator<T> {
+public class DataContainerIterator<T>  implements Iterator<T> {
 
     private T[] data;
     private int cursor = 0;
@@ -12,16 +13,16 @@ public class DataContainerIterator<T> implements Iterator<T> {
         this.data = data;
     }
 
-    public void delete(int index) {
+    public void fastRemove(int index) {
         data[index] = null;
-        T[] newData = (T[]) new Object[data.length - 1];
+        T[] newData = Arrays.copyOf(data, data.length - 1);
         for (int i = 0, j = 0; i < data.length - 1; i++, j++) {
             if (data[i] == null) {
                 j++;
             }
             newData[i] = data[j];
         }
-        data = newData;
+        this.data = newData;
         cursor--;
     }
 
@@ -29,7 +30,7 @@ public class DataContainerIterator<T> implements Iterator<T> {
     public void remove() {
         for (int i = 0; i < data.length; i++) {
             if (data[i].equals(item)) {
-                delete(i);
+               fastRemove(i);
             }
         }
     }
@@ -49,4 +50,9 @@ public class DataContainerIterator<T> implements Iterator<T> {
         item = currentItem;
         return currentItem;
     }
+
+    public  T[] getData() {
+        return data;
+    }
+
 }
