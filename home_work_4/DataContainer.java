@@ -5,6 +5,7 @@ import home_work_4.iterators.DataContainerIterator;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class DataContainer<T> implements Iterable<T> {
 
@@ -60,7 +61,7 @@ public class DataContainer<T> implements Iterable<T> {
 
     public boolean delete(T item) {
         for (int i = 0; i < data.length; i++) {
-            if (data[i].equals(item)) {
+            if (Objects.equals(data[i], item)) {
                 return delete(i);
             }
         }
@@ -68,15 +69,7 @@ public class DataContainer<T> implements Iterable<T> {
     }
 
     public void sort(Comparator<T> comparator) {
-        for (int i = 0; i < data.length; i++) {
-            for (int j = 0; j < data.length - i - 1; j++) {
-                if (comparator.compare(data[j], data[j + 1]) > 0) {
-                    T buf = data[j];
-                    data[j] = data[j + 1];
-                    data[j + 1] = buf;
-                }
-            }
-        }
+        sort(this, comparator);
     }
 
     public static <T extends Comparable<T>> void sort(DataContainer<T> dataContainer) {
@@ -132,13 +125,13 @@ public class DataContainer<T> implements Iterable<T> {
 
     @Override
     public String toString() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
         for (T datum : data) {
             if (datum != null) {
-                str += datum + " ";
+                str.append(datum).append(" ");
             }
         }
-        return str;
+        return str.toString();
     }
 
     @Override
