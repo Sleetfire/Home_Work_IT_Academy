@@ -14,14 +14,16 @@ import java.util.List;
 
 public class CollectionsMain {
     public static void main(String[] args) {
-        NamesFromFileRandomStudent namesFromFileRandomStudent = new NamesFromFileRandomStudent(new SimpleRandomStudent());
+        //SimpleRandomStudent randomStudent = new SimpleRandomStudent();
+        //ClearNameRandomStudent randomStudent = new ClearNameRandomStudent(new SimpleRandomStudent());
+        NamesFromFileRandomStudent randomStudent = new NamesFromFileRandomStudent(new SimpleRandomStudent());
 
         List<Student> list1 = new ArrayList<>();
         int numberOfStudents = 10_000;
         System.out.println("___________________________________Список студентов:___________________________________");
         for (int i = 0; i < numberOfStudents; i++) {
-            list1.add(new Student(i, namesFromFileRandomStudent.generateRandomName(), namesFromFileRandomStudent.generateRandomAge(),
-                    namesFromFileRandomStudent.generateRandomRating(), namesFromFileRandomStudent.generateRandomIsOlympiad()));
+            list1.add(new Student(i, randomStudent.generateRandomName(), randomStudent.generateRandomAge(),
+                    randomStudent.generateRandomRating(), randomStudent.generateRandomIsOlympiad()));
             System.out.println(list1.get(i));
         }
 
@@ -33,25 +35,28 @@ public class CollectionsMain {
                 System.out.println(item);
             }
         }
-
         System.out.println("_________________________Отсортированные по имени студенты:_________________________");
         list2.sort(new StudentNameComparator());
-        for (int i = 0; i < 10; i++) {
-            System.out.println(list2.get(i));
-        }
-
+        printCollection(list2);
         System.out.println("_________________________Отсортированные по оценке студенты:_________________________");
         list2.sort(new StudentRatingComparator());
-        for (int i = 0; i < 10; i++) {
-            System.out.println(list2.get(i));
-        }
-
+        printCollection(list2);
+        System.out.println("______________________Отсортированные по возрасту и оценке студенты:______________________");
         Comparator<Student> comparator = new StudentAgeComparator().thenComparing(new StudentRatingComparator());
         list2.sort(comparator);
-        System.out.println("-----------------------------------------------------------------------------");
+        printTenVariantsFromCollection(list2);
+    }
+
+    public static void printCollection(List<Student> list) {
+        for (int i = 0; i < 10; i++) {
+            System.out.println(list.get(i));
+        }
+    }
+
+    public static void printTenVariantsFromCollection(List<Student> list) {
         int age = 12;
         int count = 0;
-        for (Student student : list2) {
+        for (Student student : list) {
             if (student.getAge() == age) {
                 System.out.println(student);
                 count++;
@@ -62,7 +67,5 @@ public class CollectionsMain {
                 System.out.println("-----------------------------------------------------------------------------");
             }
         }
-
-
     }
 }

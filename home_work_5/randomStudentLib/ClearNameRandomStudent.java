@@ -38,6 +38,6 @@ public class ClearNameRandomStudent implements IRandomStudent {
 
     private int chooseRandomName() {
         Random random = new Random();
-        return random.nextInt(names.length - 1);
+        return random.nextInt(names.length);
     }
 }

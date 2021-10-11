@@ -2,7 +2,7 @@ package home_work_5.dto;
 
 import java.util.Objects;
 
-public class Student implements Comparable<Student> {
+public class Student {
     private int id;
     private String name;
     private int age;
@@ -62,28 +62,28 @@ public class Student implements Comparable<Student> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return id == student.id && age == student.age && Double.compare(student.rating, rating) == 0 &&
-                olympiad == student.olympiad && Objects.equals(name, student.name);
+        return this.id == student.id && this.age == student.age && Double.compare(student.rating, this.rating) == 0 &&
+                this.olympiad == student.olympiad && Objects.equals(this.name, student.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, age, rating, olympiad);
-    }
-
-    @Override
-    public int compareTo(Student o) {
-        return this.getAge() - o.getAge();
+        int result = 31 * this.id;
+        result += this.name == null ? 0 : this.name.hashCode();
+        result += 31 * this.age;
+        result += 31 * this.rating;
+        result += this.olympiad ? 1 : 0;
+        return result;
     }
 
     @Override
     public String toString() {
         return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", rating=" + rating +
-                ", olympiad=" + olympiad +
+                "id=" + this.id +
+                ", name='" + this.name + '\'' +
+                ", age=" + this.age +
+                ", rating=" + String.format("%.4f", this.rating) +
+                ", olympiad=" + this.olympiad +
                 '}';
     }
 }

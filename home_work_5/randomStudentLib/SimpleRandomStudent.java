@@ -43,11 +43,11 @@ public class SimpleRandomStudent implements IRandomStudent {
     }
 
     private String generateRandomLitter() {
-        int numberOfLitter = random.nextInt(31) + 1072;
+        int numberOfLitter = random.nextInt(32) + 1072;
         return Character.toString((char) numberOfLitter);
     }
 
     private int generateRandomNameSize() {
-        return random.nextInt(7) + 3;
+        return random.nextInt(8) + 3;
     }
 }
