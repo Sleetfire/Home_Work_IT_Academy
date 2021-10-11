@@ -3,6 +3,7 @@ package home_work_5.randomStudentLib;
 import home_work_5.randomStudentLib.api.IRandomStudent;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,22 +21,22 @@ public class NamesFromFileRandomStudent implements IRandomStudent {
 
     @Override
     public String generateRandomName() {
-        return list.get(chooseRandomNameFromFile());
+        return this.list.get(chooseRandomNameFromFile());
     }
 
     @Override
     public int generateRandomAge() {
-        return iRandomStudent.generateRandomAge();
+        return this.iRandomStudent.generateRandomAge();
     }
 
     @Override
     public double generateRandomRating() {
-        return iRandomStudent.generateRandomRating();
+        return this.iRandomStudent.generateRandomRating();
     }
 
     @Override
     public boolean generateRandomIsOlympiad() {
-        return iRandomStudent.generateRandomIsOlympiad();
+        return this.iRandomStudent.generateRandomIsOlympiad();
     }
 
     private void readFromFile() {

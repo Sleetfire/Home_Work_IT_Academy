@@ -18,7 +18,7 @@ public class Student {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -26,7 +26,7 @@ public class Student {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -34,7 +34,7 @@ public class Student {
     }
 
     public int getAge() {
-        return age;
+        return this.age;
     }
 
     public void setAge(int age) {
@@ -42,7 +42,7 @@ public class Student {
     }
 
     public double getRating() {
-        return rating;
+        return this.rating;
     }
 
     public void setRating(double rating) {
@@ -50,7 +50,7 @@ public class Student {
     }
 
     public boolean isOlympiad() {
-        return olympiad;
+        return this.olympiad;
     }
 
     public void setOlympiad(boolean olympiad) {

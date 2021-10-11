@@ -18,22 +18,22 @@ public class ClearNameRandomStudent implements IRandomStudent {
 
     @Override
     public String generateRandomName() {
-        return names[chooseRandomName()];
+        return this.names[chooseRandomName()];
     }
 
     @Override
     public int generateRandomAge() {
-        return iRandomStudent.generateRandomAge();
+        return this.iRandomStudent.generateRandomAge();
     }
 
     @Override
     public double generateRandomRating() {
-        return iRandomStudent.generateRandomRating();
+        return this.iRandomStudent.generateRandomRating();
     }
 
     @Override
     public boolean generateRandomIsOlympiad() {
-        return iRandomStudent.generateRandomIsOlympiad();
+        return this.iRandomStudent.generateRandomIsOlympiad();
     }
 
     private int chooseRandomName() {
