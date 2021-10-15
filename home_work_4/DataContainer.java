@@ -15,6 +15,11 @@ public class DataContainer<T> implements Iterable<T> {
         this.data = data;
     }
 
+    /**
+     * метод, который осуществляет добавление элемента в коллекцию
+     * @param item
+     * @return возвращает индекс ячейки, куда был добавлен элемент, если был передан null, возвращает -1
+     */
     public int add(T item) {
         if (item == null) {
             return -1;
@@ -27,6 +32,11 @@ public class DataContainer<T> implements Iterable<T> {
         return index;
     }
 
+    /**
+     * метод, который возвращает элемент из коллекции по его индексу
+     * @param index
+     * @return если коллекция пустая или указанный индекс выходит за пределы data - возвращает null, иначе возвращает элемент по индексу
+     */
     public T get(int index) {
         if (isEmpty()) {
             return null;
@@ -38,10 +48,19 @@ public class DataContainer<T> implements Iterable<T> {
         }
     }
 
+    /**
+     * метод, который возвращает поле data
+     * @return возвращает поле data
+     */
     public T[] getItems() {
         return this.data;
     }
 
+    /**
+     * метод, который удаляет элемент поля data по индексу
+     * @param index
+     * @return если удаление элемента произошло успешно - возвращает true, иначе возвращает false
+     */
     public boolean delete(int index) {
         try {
             data[index] = null;
@@ -59,6 +78,11 @@ public class DataContainer<T> implements Iterable<T> {
         }
     }
 
+    /**
+     * метод, который удаляет элемент поля data по item
+     * @param item
+     * @return если удаление элемента произошло успешно - возвращает true, иначе возвращает false
+     */
     public boolean delete(T item) {
         for (int i = 0; i < data.length; i++) {
             if (Objects.equals(data[i], item)) {
@@ -68,10 +92,19 @@ public class DataContainer<T> implements Iterable<T> {
         return false;
     }
 
+    /**
+     * метод, который выполняет сортировку DataContainer на основе переданного компаратора
+     * @param comparator
+     */
     public void sort(Comparator<T> comparator) {
         sort(this, comparator);
     }
 
+    /**
+     * статический метод, который выполняет сортировку переданного в него DataContainer
+     * @param dataContainer
+     * @param <T>
+     */
     public static <T extends Comparable<T>> void sort(DataContainer<T> dataContainer) {
         for (int i = 0; i < dataContainer.data.length; i++) {
             for (int j = 0; j < dataContainer.data.length - i - 1; j++) {
@@ -84,6 +117,12 @@ public class DataContainer<T> implements Iterable<T> {
         }
     }
 
+    /**
+     * статический метод, который выполняет сортировку переданного в него DataContainer на основе компаратора
+     * @param dataContainer
+     * @param comparator
+     * @param <T>
+     */
     public static <T> void sort(DataContainer<T> dataContainer, Comparator<T> comparator) {
         for (int i = 0; i < dataContainer.data.length; i++) {
             for (int j = 0; j < dataContainer.data.length - i - 1; j++) {
@@ -96,14 +135,26 @@ public class DataContainer<T> implements Iterable<T> {
         }
     }
 
+    /**
+     * метод, который расширяет поле data
+     * @return возвращает расширенный массив
+     */
     private T[] expandArray() {
         return Arrays.copyOf(data, data.length + 1);
     }
 
+    /**
+     * метод, который проверяет пустое ли поле data
+     * @return возвращает true, если поле data пустое, иначе возвращает false
+     */
     private boolean isEmpty() {
         return data.length == 0;
     }
 
+    /**
+     * метод, который проверяет заполнено ли поле data
+     * @return если поле заполнено - возвращает true, иначе возвращает false
+     */
     private boolean isFull() {
         for (T datum : data) {
             if (datum == null) {
@@ -113,6 +164,11 @@ public class DataContainer<T> implements Iterable<T> {
         return true;
     }
 
+    /**
+     * метод, который заполняет поле data элементами
+     * @param item
+     * @return возвращает индекс поля data, если элемент был добавлен, иначе возвращает -1
+     */
     private int dataFill(T item) {
         for (int i = 0; i < data.length; i++) {
             if (data[i] == null) {
