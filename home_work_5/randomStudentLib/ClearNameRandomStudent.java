@@ -16,6 +16,10 @@ public class ClearNameRandomStudent implements IRandomStudent {
         this.iRandomStudent = iRandomStudent;
     }
 
+    /**
+     * метод, который возвращает случайное имя
+     * @return возвращает случайные русские имена из поля names
+     */
     @Override
     public String generateRandomName() {
         return this.names[chooseRandomName()];
@@ -36,6 +40,10 @@ public class ClearNameRandomStudent implements IRandomStudent {
         return this.iRandomStudent.generateRandomIsOlympiad();
     }
 
+    /**
+     * метод, который выбирает случайное имя из поля names
+     * @return возвращает русское имя
+     */
     private int chooseRandomName() {
         Random random = new Random();
         return random.nextInt(names.length);
