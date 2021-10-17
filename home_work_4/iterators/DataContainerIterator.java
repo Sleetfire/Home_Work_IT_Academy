@@ -3,7 +3,7 @@ package home_work_4.iterators;
 import java.util.Arrays;
 import java.util.Iterator;
 
-public class DataContainerIterator<T>  implements Iterator<T> {
+public class DataContainerIterator<T> implements Iterator<T> {
 
     private T[] data;
     private int cursor = 0;
@@ -13,6 +13,10 @@ public class DataContainerIterator<T>  implements Iterator<T> {
         this.data = data;
     }
 
+    /**
+     * метод, который удаляет элемент по индексу
+     * @param index
+     */
     public void fastRemove(int index) {
         data[index] = null;
         T[] newData = Arrays.copyOf(data, data.length - 1);
@@ -54,5 +58,4 @@ public class DataContainerIterator<T>  implements Iterator<T> {
     public  T[] getData() {
         return data;
     }
-
 }

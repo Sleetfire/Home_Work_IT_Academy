@@ -3,7 +3,6 @@ package home_work_5.randomStudentLib;
 import home_work_5.randomStudentLib.api.IRandomStudent;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,6 +18,10 @@ public class NamesFromFileRandomStudent implements IRandomStudent {
         this.iRandomStudent = iRandomStudent;
     }
 
+    /**
+     * метод, который возвращает случайное имя
+     * @return возвращает случайное русское имя, прочитанное из файла
+     */
     @Override
     public String generateRandomName() {
         return this.list.get(chooseRandomNameFromFile());
@@ -39,6 +42,9 @@ public class NamesFromFileRandomStudent implements IRandomStudent {
         return this.iRandomStudent.generateRandomIsOlympiad();
     }
 
+    /**
+     * метод, который считывает имена из файла в поле list
+     */
     private void readFromFile() {
         String path = "src/home_work_5/randomStudentLib/names.txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
@@ -53,6 +59,10 @@ public class NamesFromFileRandomStudent implements IRandomStudent {
         }
     }
 
+    /**
+     * метод, который выбирает номер элемента из списка list
+     * @return возвращает число от 0 до размера поля list
+     */
     private int chooseRandomNameFromFile() {
         readFromFile();
         Random random = new Random();

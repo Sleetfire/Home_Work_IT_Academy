@@ -47,12 +47,20 @@ public class CollectionsMain {
         printTenVariantsFromCollection(list2);
     }
 
+    /**
+     * метод, который печатает первые 10 элементов коллекции
+     * @param list
+     */
     public static void printCollection(List<Student> list) {
         for (int i = 0; i < 10; i++) {
             System.out.println(list.get(i));
         }
     }
 
+    /**
+     * метод, который печатает по 10 элементов коллекции разных возрастов (от 12 до 17)
+     * @param list
+     */
     public static void printTenVariantsFromCollection(List<Student> list) {
         int age = 12;
         int count = 0;
