@@ -1,46 +1,11 @@
 package home_work_6;
 
-import org.w3c.dom.ls.LSOutput;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.*;
 import java.util.regex.Pattern;
 
-public class Main {
-    public static void main(String[] args) throws IOException {
+public class WorkWithCollections {
 
-        String actual = null;
-        try {
-            Path fileName = Path.of("book.txt");
-            actual = Files.readString(fileName);
-            //System.out.println(actual);
-        } catch (IOException e1) {
-            System.out.println(e1.getMessage());
-        }
-        //System.out.println(exclusiveWords(actual));
-
-//        System.out.println(exclusiveWords("привет, как дела!"));
-//        System.out.println(exclusiveWords("привет,какдела!"));
-//        System.out.println(exclusiveWords("привет;какдела!"));
-//        System.out.println(exclusiveWords("как дела!.Что делаешь?"));
-//        System.out.println(exclusiveWords("Привет-привет"));
-//        System.out.println(exclusiveWords("Привет -привет"));
-//        System.out.println(exclusiveWords("4-х"));
-//        System.out.println(exclusiveWords("один и 1"));
-//        System.out.println(exclusiveWords("бабушка бабушке бабушку"));
-
-        printTopRecords(mapSort(fillMap(actual)), 10);
-
-        EasySearch easySearch = new EasySearch();
-        System.out.println(easySearch.search("Привет- привет", "привет"));
-        //System.out.println(new RegExSearch().search("мама и папа", "и"));
-
-
-    }
-
-    public static Set<String> searchExclusiveWords(String str) {
+    public Set<String> searchExclusiveWords(String str) {
         Set<String> words = new HashSet<>();
         //String [] strArr = str.split("[^А-Яа-я0-9\\-][-]");
         String[] strArr = str.split("[^А-Яа-я0-9\\-]");
@@ -50,37 +15,41 @@ public class Main {
         return words;
     }
 
-    public static boolean isRussianLetter(char symbol) {
+    public boolean isRussianLetter(char symbol) {
         symbol = Character.toUpperCase(symbol);
         int numberValue = symbol;
         return (numberValue >= 1040 && numberValue <= 1071) || numberValue == 1025;
     }
 
-    public static boolean isEnglishLetter(char symbol) {
+    public boolean isEnglishLetter(char symbol) {
         symbol = Character.toUpperCase(symbol);
         int numberValue = symbol;
         return numberValue >= 65 && numberValue <= 90;
     }
 
-    public static boolean isLetter(char symbol) {
+    public boolean isLetter(char symbol) {
         return isEnglishLetter(symbol) || isRussianLetter(symbol);
     }
 
-    public static boolean isFigure(char symbol) {
+    public boolean isFigure(char symbol) {
         int numberValue = symbol;
         return numberValue >= 48 && numberValue <= 57;
     }
 
-    public static boolean isDash(char symbol) {
+    public boolean isAllowedSymbol (char symbol) {
+        return isLetter(symbol) || isFigure(symbol);
+    }
+
+    public boolean isDash(char symbol) {
         return (int) symbol == 45;
     }
 
-    public static String[] splitStringByGap(String str) {
+    public String[] splitStringByGap(String str) {
         Pattern pattern = Pattern.compile("\\s*(\\s|,|;|:|!|\\.)\\s*");
         return pattern.split(str.trim());
     }
 
-    public static Set<String> exclusiveWords(String str) {
+    public Set<String> exclusiveWords(String str) {
         String[] stringArray = splitStringByGap(str);
         StringBuilder word = new StringBuilder();
         Set<String> words = new HashSet<>();
@@ -105,7 +74,7 @@ public class Main {
         return words;
     }
 
-    public static Map<String, Integer> fillMap(Set<String> words) {
+    public Map<String, Integer> fillMap(Set<String> words) {
         Map<String, Integer> map = new HashMap<>();
         for (String word : words) {
             map.put(word, 1);
@@ -113,7 +82,7 @@ public class Main {
         return map;
     }
 
-    public static Map<String, Integer> fillMap(String str) {
+    public Map<String, Integer> fillMap(String str) {
         String[] stringArray = splitStringByGap(str);
         StringBuilder word = new StringBuilder();
         Map<String, Integer> map = new HashMap<>();
@@ -147,7 +116,7 @@ public class Main {
         return map;
     }
 
-    public static List mapSort(Map<String, Integer> map) {
+    public List mapSort(Map<String, Integer> map) {
         List list = new ArrayList(map.entrySet());
         list.sort(new Comparator<Map.Entry<String, Integer>>() {
             @Override
@@ -158,11 +127,10 @@ public class Main {
         return list;
     }
 
-    public static void printTopRecords(List list, int records) {
+    public void printTopRecords(List list, int records) {
         for (int i = 0; i < records; i++) {
             System.out.println(list.get(i));
         }
     }
+
 }
-
-
