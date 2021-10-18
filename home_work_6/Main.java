@@ -31,12 +31,15 @@ public class Main {
 //        System.out.println(exclusiveWords("один и 1"));
 //        System.out.println(exclusiveWords("бабушка бабушке бабушку"));
 
+//
+
         printTopRecords(mapSort(fillMap(actual)), 10);
 
         EasySearch easySearch = new EasySearch();
-        System.out.println(easySearch.search("Привет- привет", "привет"));
-        //System.out.println(new RegExSearch().search("мама и папа", "и"));
 
+        System.out.println(easySearch.search(actual, "не"));
+        System.out.println(new RegExSearch().search(actual, "не"));
+        System.out.println(mapSort(fillMap(actual)).get(0));
 
     }
 
@@ -76,7 +79,7 @@ public class Main {
     }
 
     public static String[] splitStringByGap(String str) {
-        Pattern pattern = Pattern.compile("\\s*(\\s|,|;|:|!|\\.)\\s*");
+        Pattern pattern = Pattern.compile("\\s*(\\s|,|;|:|\\?|!|\\.)\\s*");
         return pattern.split(str.trim());
     }
 

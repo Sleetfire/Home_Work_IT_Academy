@@ -17,10 +17,10 @@ public class EasySearch implements ISearchEngine {
             while (index != -1) {
                 try {
                     index = text.indexOf(word, index + word.length());
-                    firstBorder = index;
+                    firstBorder = index - 1;
                     lastBorder = index + word.length();
                     if (firstBorder >= 0 && lastBorder <= text.length() - 1) {
-                        if (!(temp.isAllowedSymbol(text.charAt(firstBorder)) && temp.isAllowedSymbol(text.charAt(lastBorder)))) {
+                        if ((!temp.isAllowedSymbol(text.charAt(firstBorder)) && !temp.isAllowedSymbol(text.charAt(lastBorder)))) {
                             counter++;
                         }
                     }
