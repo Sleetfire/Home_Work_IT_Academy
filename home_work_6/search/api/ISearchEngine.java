@@ -1,4 +1,4 @@
-package home_work_6.api;
+package home_work_6.search.api;
 
 public interface ISearchEngine {
 

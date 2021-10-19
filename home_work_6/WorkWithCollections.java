@@ -5,16 +5,6 @@ import java.util.regex.Pattern;
 
 public class WorkWithCollections {
 
-    public Set<String> searchExclusiveWords(String str) {
-        Set<String> words = new HashSet<>();
-        //String [] strArr = str.split("[^А-Яа-я0-9\\-][-]");
-        String[] strArr = str.split("[^А-Яа-я0-9\\-]");
-        for (int i = 0; i < strArr.length; i++) {
-            words.add(strArr[i]);
-        }
-        return words;
-    }
-
     public boolean isRussianLetter(char symbol) {
         symbol = Character.toUpperCase(symbol);
         int numberValue = symbol;
@@ -36,7 +26,7 @@ public class WorkWithCollections {
         return numberValue >= 48 && numberValue <= 57;
     }
 
-    public boolean isAllowedSymbol (char symbol) {
+    public boolean isAllowedSymbol(char symbol) {
         return isLetter(symbol) || isFigure(symbol);
     }
 
@@ -45,7 +35,7 @@ public class WorkWithCollections {
     }
 
     public String[] splitStringByGap(String str) {
-        Pattern pattern = Pattern.compile("\\s*(\\s|,|;|:|!|\\.)\\s*");
+        Pattern pattern = Pattern.compile("\\s*(\\s|,|;|:|\\?|\"|!|\\.)\\s*");
         return pattern.split(str.trim());
     }
 
@@ -134,3 +124,5 @@ public class WorkWithCollections {
     }
 
 }
+
+

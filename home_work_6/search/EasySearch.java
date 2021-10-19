@@ -1,8 +1,7 @@
-package home_work_6;
+package home_work_6.search;
 
-import home_work_6.api.ISearchEngine;
-
-import java.util.Locale;
+import home_work_6.WorkWithCollections;
+import home_work_6.search.api.ISearchEngine;
 
 public class EasySearch implements ISearchEngine {
 
@@ -32,15 +31,3 @@ public class EasySearch implements ISearchEngine {
         return counter;
     }
 }
-
-
-//    long counter = 0;
-//    WorkWithCollections a = new WorkWithCollections();
-//    int index = -word.length();
-//        do {
-//                index = text.indexOf(word, index + word.length());
-//                if (index > 0 && !(a.isLetter(text.charAt(index - 1)) && a.isAllowedSymbol(text.charAt(index + word.length())))) {
-//                counter++;
-//                }
-//                } while (index != -1);
-//                return counter - 1;
