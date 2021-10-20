@@ -1,6 +1,8 @@
-package home_work_6.search;
+package home_work_6.search.decorators;
 
 import home_work_6.search.api.ISearchEngine;
+
+import java.util.Locale;
 
 public class SearchWithoutCase implements ISearchEngine {
 
@@ -18,6 +20,16 @@ public class SearchWithoutCase implements ISearchEngine {
     public long search(String text, String word) {
         return iSearchEngine.search(text, word);
     }
+
+    public String makeLowerCase(String str) {
+        return str.toLowerCase(Locale.ROOT);
+    }
+
+    public String makeRegexLoweCase(String str) {
+        return "(?i)" + str;
+    }
+
+
 
 
 

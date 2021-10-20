@@ -1,6 +1,7 @@
 package home_work_6.runners;
 
 import home_work_6.search.RegExSearch;
+import home_work_6.utils.FileHandler;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,7 +18,7 @@ public class WorkWithFilesMain {
         String directoryPath;
         File dir;
         do {
-            System.out.println("Введите адрес папки, из которой будем считывать текстовые файлы");
+            System.out.println("Введите адрес папки, из которой будем считывать текстовые файлы:");
             directoryPath = scanner.nextLine();
             dir = new File(directoryPath);
         } while (!dir.isDirectory());
@@ -31,37 +32,39 @@ public class WorkWithFilesMain {
         }
         System.out.println("Введите название файла, который хотите открыть:");
         String fileName = scanner.nextLine();
-        String text = null;
-        try {
-            Path file = Path.of(fileName);
-            text = Files.readString(file);
-        } catch (IOException e1) {
-            System.out.println(e1.getMessage());
-        }
+        String text = FileHandler.parseFileToString(fileName);
+        searchWordAndWriteInFile(fileName, text);
 
+    }
+
+    public static void searchWordAndWriteInFile(String fileName, String text) {
         String word;
+        Scanner scanner = new Scanner(System.in);
         RegExSearch regExSearch = new RegExSearch();
         long numberOfWords;
-        BufferedWriter outWriter = null;
+        BufferedWriter outWriter;
         try {
             outWriter = new BufferedWriter(new FileWriter("result.txt", true));
-
-
             String note;
             do {
                 System.out.println("Введите слово, которое хотите найти в файле");
+                System.out.println("Для выхода нажмите 'f'");
                 word = scanner.nextLine();
                 numberOfWords = regExSearch.search(text, word);
-                System.out.println(numberOfWords);
-                note = fileName + " – " + word + " – " + numberOfWords;
-                if (numberOfWords > 0) {
-                    outWriter.newLine();
-                    outWriter.write(note);
+                if (!Objects.equals("f", word)) {
+                    System.out.println(String.format("Слово '%s' повторяется %d раз", word, numberOfWords));
+                    note = fileName + " – " + word + " – " + numberOfWords;
+
+                    if (numberOfWords >= 0) {
+                        outWriter.newLine();
+                        outWriter.write(note);
+                    }
+                } else {
+                    System.out.println("Выход");
                 }
             } while (!Objects.equals("f", word));
             outWriter.flush();
             outWriter.close();
-
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

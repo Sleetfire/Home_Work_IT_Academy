@@ -11,10 +11,14 @@ public class RegExSearch implements ISearchEngine {
         long counter = 0;
         //Pattern pattern = Pattern.compile("(?:^|[^a-zA-Zа-яА-ЯёЁ])(?:" + word + ")(?![a-zA-Zа-яА-ЯёЁ])");
         //Pattern pattern = Pattern.compile("\\b" + word + "\\b", Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
-        Pattern pattern = Pattern.compile("\\b" + word + "\\b");
-        Matcher matcher = pattern.matcher(text);
-        while (matcher.find()) {
-            counter++;
+        try {
+            Pattern pattern = Pattern.compile("\\b" + word + "\\b", Pattern.UNICODE_CASE);
+            Matcher matcher = pattern.matcher(text);
+            while (matcher.find()) {
+                counter++;
+            }
+        } catch (NullPointerException e1) {
+            System.out.println(e1.getMessage());
         }
         return counter;
     }

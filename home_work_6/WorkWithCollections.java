@@ -122,7 +122,6 @@ public class WorkWithCollections {
             System.out.println(list.get(i));
         }
     }
-
 }
 
 
