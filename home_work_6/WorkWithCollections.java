@@ -34,13 +34,13 @@ public class WorkWithCollections {
         return (int) symbol == 45;
     }
 
-    public String[] splitStringByGap(String str) {
+    private String[] splitString(String str) {
         Pattern pattern = Pattern.compile("\\s*(\\s|,|;|:|\\?|\"|!|\\.)\\s*");
         return pattern.split(str.trim());
     }
 
     public Set<String> exclusiveWords(String str) {
-        String[] stringArray = splitStringByGap(str);
+        String[] stringArray = splitString(str);
         StringBuilder word = new StringBuilder();
         Set<String> words = new HashSet<>();
         for (String s : stringArray) {
@@ -64,25 +64,16 @@ public class WorkWithCollections {
         return words;
     }
 
-    public Map<String, Integer> fillMap(Set<String> words) {
-        Map<String, Integer> map = new HashMap<>();
-        for (String word : words) {
-            map.put(word, 1);
-        }
-        return map;
-    }
-
     public Map<String, Integer> fillMap(String str) {
-        String[] stringArray = splitStringByGap(str);
+        String[] stringArray = splitString(str);
         StringBuilder word = new StringBuilder();
         Map<String, Integer> map = new HashMap<>();
         for (String s : stringArray) {
             for (int j = 0; j < s.length(); j++) {
-                if (isLetter(s.charAt(j)) || isFigure(s.charAt(j))) {
+                if (isAllowedSymbol(s.charAt(j))) {
                     word.append(s.charAt(j));
                 }
             }
-
             if (word.length() > 0) {
                 if (word.charAt(0) == '-') {
                     word.setCharAt(0, ' ');
@@ -92,7 +83,6 @@ public class WorkWithCollections {
             } else {
                 continue;
             }
-
             if (!map.containsKey(word.toString())) {
                 map.put(word.toString(), 1);
             } else {
@@ -122,6 +112,7 @@ public class WorkWithCollections {
             System.out.println(list.get(i));
         }
     }
+
 }
 
 
