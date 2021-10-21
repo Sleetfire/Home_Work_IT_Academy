@@ -21,10 +21,20 @@ public class SearchWithoutCase implements ISearchEngine {
         return iSearchEngine.search(text, word);
     }
 
+    /**
+     * Метод, который переводит строку в нижний регистр
+     * @param str
+     * @return строку в нижнем регистре
+     */
     public String makeLowerCase(String str) {
         return str.toLowerCase(Locale.ROOT);
     }
 
+    /**
+     * Метод, который добавляет к строке свойство нечувствительности к регистру
+     * @param str
+     * @return строку, которая будет нечувствительна к регистру, если использовать ее в регулярном выражении
+     */
     public String makeRegexLoweCase(String str) {
         return "(?i)" + str;
     }

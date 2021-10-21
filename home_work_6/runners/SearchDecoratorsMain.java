@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class SearchDecoratorsMain {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String text = FileHandler.parseFileToString("book.txt");
+        String text = FileHandler.parseFileToString("Война и мир.txt");
         System.out.println("Введите слово, которое желаете найти: ");
         String word = scanner.nextLine();
 

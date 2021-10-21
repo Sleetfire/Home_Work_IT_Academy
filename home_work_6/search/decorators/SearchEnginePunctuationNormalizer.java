@@ -16,6 +16,11 @@ public class SearchEnginePunctuationNormalizer implements ISearchEngine {
         return iSearchEngine.search(text, word);
     }
 
+    /**
+     * Метод, который удаляет в строке знаки препинания, нежелательные пробелы, переводы строки и т.д.
+     * @param text
+     * @return отформатированную строку
+     */
     private String clearText (String text) {
         return text.replaceAll("[\\-\\+\\.\\?\\!\\n\\t\\^:,]", "").replaceAll("\\s{2,}", " ");
     }

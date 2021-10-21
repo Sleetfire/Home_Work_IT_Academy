@@ -7,6 +7,11 @@ import java.nio.file.Path;
 
 public class FileHandler {
 
+    /**
+     * Метод, который парсит текст из файла в строку
+     * @param fileName
+     * @return строку с тектом
+     */
     public static String parseFileToString(String fileName) {
         String str = null;
         try {

@@ -37,6 +37,11 @@ public class WorkWithFilesMain {
 
     }
 
+    /**
+     * Метод, который ищет слово, а потом записывает его в файл
+     * @param fileName
+     * @param text
+     */
     public static void searchWordAndWriteInFile(String fileName, String text) {
         String word;
         Scanner scanner = new Scanner(System.in);
