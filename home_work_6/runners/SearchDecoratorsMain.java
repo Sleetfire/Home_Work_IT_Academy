@@ -25,6 +25,11 @@ public class SearchDecoratorsMain {
         printSearchingWithoutCase(new RegExSearch(), word, text);
         System.out.println("Поиск с помощью indexOf()");
         printSearchingWithoutCase(new EasySearch(), word, text);
+
+        System.out.println("____________________Задание 5____________________");
+        printSearchingWithoutCase(new RegExSearch(), "война", text);
+        printSearchingWithoutCase(new RegExSearch(), "и", text);
+        printSearchingWithoutCase(new RegExSearch(), "мир", text);
     }
 
     public static void printSearchingWithDeleteGarbage(ISearchEngine iSearchEngine, String word, String text) {

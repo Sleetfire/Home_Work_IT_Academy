@@ -7,8 +7,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -25,6 +23,7 @@ public class WorkWithFilesMain {
 
         String[] files = dir.list();
         assert files != null;
+        System.out.println("Файлы с разрешением .txt в данной папке:");
         for (String file : files) {
             if (file.contains(".txt")) {
                 System.out.println(file);
@@ -32,6 +31,7 @@ public class WorkWithFilesMain {
         }
         System.out.println("Введите название файла, который хотите открыть:");
         String fileName = scanner.nextLine();
+        fileName = directoryPath + "\\" + fileName;
         String text = FileHandler.parseFileToString(fileName);
         searchWordAndWriteInFile(fileName, text);
 
