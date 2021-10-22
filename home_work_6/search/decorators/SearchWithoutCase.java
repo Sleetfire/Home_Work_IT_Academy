@@ -16,6 +16,12 @@ public class SearchWithoutCase implements ISearchEngine {
         return iSearchEngine;
     }
 
+    /**
+     *
+     * @param text строка с текстом
+     * @param word слово,которое необходимо найти
+     * @return
+     */
     @Override
     public long search(String text, String word) {
         return iSearchEngine.search(text, word);

@@ -9,7 +9,8 @@ public class FileHandler {
 
     /**
      * Метод, который парсит текст из файла в строку
-     * @param fileName
+     *
+     * @param fileName название файла, который хотим открыть
      * @return строку с тектом
      */
     public static String parseFileToString(String fileName) {

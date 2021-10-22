@@ -7,7 +7,8 @@ public class WorkWithCollections {
 
     /**
      * Метод, который проверяет является ли переданный символ русской буквой
-     * @param symbol
+     *
+     * @param symbol символ, который хотим проверить
      * @return true, если была передана русская буква, иначе false
      */
     public boolean isRussianLetter(char symbol) {
@@ -18,7 +19,8 @@ public class WorkWithCollections {
 
     /**
      * Метод, который проверяет является ли переданный символ английской буквой
-     * @param symbol
+     *
+     * @param symbol символ, который хотим проверить
      * @return true, если была передана английская буква, иначе false
      */
     public boolean isEnglishLetter(char symbol) {
@@ -29,7 +31,8 @@ public class WorkWithCollections {
 
     /**
      * Метод, который проверяет является ли переданный символ английской или русской буквой
-     * @param symbol
+     *
+     * @param symbol символ, который хотим проверить
      * @return true, если была передана английская или русская буква, иначе false
      */
     public boolean isLetter(char symbol) {
@@ -38,7 +41,8 @@ public class WorkWithCollections {
 
     /**
      * Метод, который проверяет является ли переданный символ цифрой
-     * @param symbol
+     *
+     * @param symbol символ, который хотим проверить
      * @return true, если была передана цифра, иначе false
      */
     public boolean isFigure(char symbol) {
@@ -48,7 +52,8 @@ public class WorkWithCollections {
 
     /**
      * Метод, который проверяет является ли переданный символ допустимым
-     * @param symbol
+     *
+     * @param symbol символ, который хотим проверить
      * @return true, если была передана английская или русская буква или цифра, иначе false
      */
     public boolean isAllowedSymbol(char symbol) {
@@ -57,7 +62,8 @@ public class WorkWithCollections {
 
     /**
      * Метод, который проверяет является ли переданный символ тире (минус)
-     * @param symbol
+     *
+     * @param symbol символ, который хотим проверить
      * @return true, если было передано тире (минус), иначе false
      */
     public boolean isDash(char symbol) {
@@ -66,7 +72,8 @@ public class WorkWithCollections {
 
     /**
      * Метод, который разбивает строку на основе разделителя
-     * @param str
+     *
+     * @param str строка, которую хотим разделить
      * @return массив слов
      */
     private String[] splitString(String str) {
@@ -76,7 +83,8 @@ public class WorkWithCollections {
 
     /**
      * метод, который записывает уникальные слова в HashSet
-     * @param str
+     *
+     * @param str строка, из которой будем записывать слова в HashSet
      * @return коллекцию HashSet
      */
     public Set<String> exclusiveWords(String str) {
@@ -106,7 +114,8 @@ public class WorkWithCollections {
 
     /**
      * Метод, который заполняет Map словами (Key) и их количестом (Value)
-     * @param str
+     *
+     * @param str строка, из которой будем записывать слова в Map
      * @return отображение ключ-значение (слово-количество)
      */
     public Map<String, Integer> fillMap(String str) {
@@ -142,7 +151,8 @@ public class WorkWithCollections {
 
     /**
      * Метод, который сортирует Map
-     * @param map
+     *
+     * @param map Map, которую хотим отсортировать
      * @return отсортированный список
      */
     public List mapSort(Map<String, Integer> map) {
@@ -158,8 +168,9 @@ public class WorkWithCollections {
 
     /**
      * Метод, который выводит в консоль n первых слов и их количество из списка
-     * @param list
-     * @param records
+     *
+     * @param list    список, откуда хотим вывести слова
+     * @param records количество слов
      */
     public void printTopRecords(List list, int records) {
         for (int i = 0; i < records; i++) {

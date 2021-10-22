@@ -39,8 +39,8 @@ public class WorkWithFilesMain {
 
     /**
      * Метод, который ищет слово, а потом записывает его в файл
-     * @param fileName
-     * @param text
+     * @param fileName название файла, где искали текст, чтобы потом записать его в файл с результатами
+     * @param text строка, в которую было записано содержимое файла
      */
     public static void searchWordAndWriteInFile(String fileName, String text) {
         String word;

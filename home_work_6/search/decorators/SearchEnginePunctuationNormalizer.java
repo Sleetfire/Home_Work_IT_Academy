@@ -10,6 +10,12 @@ public class SearchEnginePunctuationNormalizer implements ISearchEngine {
         this.iSearchEngine = iSearchEngine;
     }
 
+    /**
+     *
+     * @param text строка с текстом
+     * @param word слово,которое необходимо найти
+     * @return
+     */
     @Override
     public long search(String text, String word) {
         text = clearText(text);

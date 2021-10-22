@@ -6,6 +6,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegExSearch implements ISearchEngine {
+    /**
+     *
+     * @param text строка с текстом
+     * @param word слово,которое необходимо найти
+     * @return
+     */
     @Override
     public long search(String text, String word) {
         long counter = 0;

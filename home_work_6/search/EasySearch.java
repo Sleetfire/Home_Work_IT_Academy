@@ -5,6 +5,12 @@ import home_work_6.search.api.ISearchEngine;
 
 public class EasySearch implements ISearchEngine {
 
+    /**
+     *
+     * @param text строка с текстом
+     * @param word слово,которое необходимо найти
+     * @return
+     */
     @Override
     public long search(String text, String word) {
         if (word == null) {
