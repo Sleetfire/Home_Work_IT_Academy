@@ -7,9 +7,9 @@
 [3] Интерфейс ISearchEngine находится в пакете api, который лежит в пакете search.
 
 [4] Реализовать интерфейс ISearchEngine:
-	[4.1] класс EasySearch находится пакете search.
-	[4.2] класс RegExSearch находится пакете search.
-	[4.3] класс SearchEnginePunctuationNormalizer находится пакете decorators, который 
+	[4.1] класс EasySearch находится в пакете search.
+	[4.2] класс RegExSearch находится в пакете search.
+	[4.3] класс SearchEnginePunctuationNormalizer находится в пакете decorators, который 
 	лежит в пакете search.
 	[4.4] класс SearchWithoutCase находится пакете decorators, который 
 	лежит в пакете search.
