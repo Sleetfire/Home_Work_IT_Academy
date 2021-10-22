@@ -15,7 +15,7 @@ public class DataContainerIterator<T> implements Iterator<T> {
 
     /**
      * метод, который удаляет элемент по индексу
-     * @param index
+     * @param index индекс элемента коллекции
      */
     public void fastRemove(int index) {
         data[index] = null;

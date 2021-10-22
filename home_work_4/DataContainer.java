@@ -17,7 +17,7 @@ public class DataContainer<T> implements Iterable<T> {
 
     /**
      * метод, который осуществляет добавление элемента в коллекцию
-     * @param item
+     * @param item элемент, который добавляем в контейнер
      * @return возвращает индекс ячейки, куда был добавлен элемент, если был передан null, возвращает -1
      */
     public int add(T item) {
@@ -34,7 +34,7 @@ public class DataContainer<T> implements Iterable<T> {
 
     /**
      * метод, который возвращает элемент из коллекции по его индексу
-     * @param index
+     * @param index индекс элемента контейнера
      * @return если коллекция пустая или указанный индекс выходит за пределы data - возвращает null, иначе возвращает элемент по индексу
      */
     public T get(int index) {
@@ -58,7 +58,7 @@ public class DataContainer<T> implements Iterable<T> {
 
     /**
      * метод, который удаляет элемент поля data по индексу
-     * @param index
+     * @param index индекс элемента контейнера
      * @return если удаление элемента произошло успешно - возвращает true, иначе возвращает false
      */
     public boolean delete(int index) {
@@ -80,7 +80,7 @@ public class DataContainer<T> implements Iterable<T> {
 
     /**
      * метод, который удаляет элемент поля data по item
-     * @param item
+     * @param item элемент, который добавляем в контейнер
      * @return если удаление элемента произошло успешно - возвращает true, иначе возвращает false
      */
     public boolean delete(T item) {
@@ -94,7 +94,7 @@ public class DataContainer<T> implements Iterable<T> {
 
     /**
      * метод, который выполняет сортировку DataContainer на основе переданного компаратора
-     * @param comparator
+     * @param comparator компаратор, на основе которого собираемся выполнять сортировку
      */
     public void sort(Comparator<T> comparator) {
         sort(this, comparator);
@@ -102,7 +102,7 @@ public class DataContainer<T> implements Iterable<T> {
 
     /**
      * статический метод, который выполняет сортировку переданного в него DataContainer
-     * @param dataContainer
+     * @param dataContainer контейнер, который хотим отсортировать
      * @param <T>
      */
     public static <T extends Comparable<T>> void sort(DataContainer<T> dataContainer) {
@@ -119,8 +119,8 @@ public class DataContainer<T> implements Iterable<T> {
 
     /**
      * статический метод, который выполняет сортировку переданного в него DataContainer на основе компаратора
-     * @param dataContainer
-     * @param comparator
+     * @param dataContainer контейнер, который хотим отсортировать
+     * @param comparator компаратор, на основе которого собираемся выполнять сортировку
      * @param <T>
      */
     public static <T> void sort(DataContainer<T> dataContainer, Comparator<T> comparator) {
@@ -166,7 +166,7 @@ public class DataContainer<T> implements Iterable<T> {
 
     /**
      * метод, который заполняет поле data элементами
-     * @param item
+     * @param item элемент коллекции
      * @return возвращает индекс поля data, если элемент был добавлен, иначе возвращает -1
      */
     private int dataFill(T item) {
