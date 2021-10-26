@@ -1,4 +1,4 @@
-package eighthTask;
+package home_work_1.eighthTask;
 
 public interface ICommunicationPrinter {
 

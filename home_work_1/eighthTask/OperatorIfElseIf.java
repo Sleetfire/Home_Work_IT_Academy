@@ -1,6 +1,4 @@
-package eighthTask;
-
-
+package home_work_1.eighthTask;
 
 public class OperatorIfElseIf implements ICommunicationPrinter {
 

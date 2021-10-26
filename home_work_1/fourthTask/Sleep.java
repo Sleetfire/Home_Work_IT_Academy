@@ -1,4 +1,4 @@
-package fourthTask;
+package home_work_1.fourthTask;
 
 //4.* Создать СТАТИЧЕСКИЙ метод sleepIn рядом с методом main. (Взято с https://codingbat.com/prob/p187868).
 //        4.1 Данный метод будет принимать два параметра

@@ -1,4 +1,4 @@
-package fifthTask;
+package home_work_1.fifthTask;
 
 //5.2 Написать в отдельном классе в отдельном main код который будет выполнять общее условие при помощи if else if
 

@@ -1,6 +1,4 @@
-package eighthTask;
-
-import java.util.Scanner;
+package home_work_1.eighthTask;
 
 public class OperatorSwitch implements ICommunicationPrinter {
 
