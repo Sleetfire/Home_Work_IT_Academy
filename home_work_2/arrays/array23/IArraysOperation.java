@@ -2,10 +2,10 @@ package home_work_2.arrays.array23;
 
 public interface IArraysOperation {
 
-    void printAllElements (int [] array);
+    String printAllElements (int [] array);
 
-    void printAllSecondElement (int [] array);
+    String printAllSecondElement (int [] array);
 
-    void printReverseArray (int [] array);
+    String printReverseArray (int [] array);
 
 }

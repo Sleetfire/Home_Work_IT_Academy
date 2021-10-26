@@ -38,9 +38,7 @@ public class Loops13 {
             System.out.println(number + " ^ " + degree + " = 1" );
             return;
         }
-        for (int i = 1; i < degree; i++) {
-            result *= result;
-        }
+
 
         System.out.println(number + " ^ " + degree + " = " + result);
     }

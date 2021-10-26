@@ -39,7 +39,7 @@ public class SortsUtils {
     }
 
     //4.2.1. Пузырьковая сортировка
-    public static void bubbleSort(int[] array) {
+    public static int[] bubbleSort(int[] array) {
         System.out.println("Массив имеет следующий вид: ");
         System.out.println(Arrays.toString(array));
         for (int i = 0; i < array.length; i++) {
@@ -53,16 +53,17 @@ public class SortsUtils {
         }
         System.out.println("Отсортированный массив имеет следующий вид: ");
         System.out.println(Arrays.toString(array));
+        return array;
     }
 
     //4.2.2. Шейкерная сортировка
-    public static void shakerSort(int[] array) {
+    public static int[] shakerSort(int[] array) {
         System.out.println("Массив имеет следующий вид: ");
         System.out.println(Arrays.toString(array));
         int leftCount = 0;
         int rightCount = array.length - 1;
         int buf;
-    do {
+        do {
             for (int i = leftCount; i < rightCount; i++) {
                 if (array[i] > array[i + 1]) {
                     buf = array[i];
@@ -82,5 +83,6 @@ public class SortsUtils {
         } while (leftCount < rightCount);
         System.out.println("Отсортированный массив имеет следующий вид: ");
         System.out.println(Arrays.toString(array));
+        return array;
     }
 }

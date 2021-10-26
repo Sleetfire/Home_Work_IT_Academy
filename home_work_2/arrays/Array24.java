@@ -9,6 +9,8 @@ package home_work_2.arrays;
 //2.4.5. Сжать массив, удалив элементы, принадлежащие интервалу
 //2.4.6. Сумма цифр массива
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -17,21 +19,21 @@ import static home_work_2.utils.ArrayUtils.arrayRandom;
 public class Array24 {
 
     public static void main(String[] args) {
-        //sumEvenPositiveElements(10, 10);
+        sumEvenPositiveElements(10, 10);
 
-        //maxElementWithOvenIndex(10, 10);
+        maxElementWithOvenIndex(10, 10);
 
-        //elementsLessMiddle(10, 10);
+        elementsLessMiddle(10, 10);
 
-        //searchTwoMinElements(10, 10);
+        searchTwoMinElements(10, 10);
 
-        //arrayCompression(10, 10);
+        arrayCompression(10, 10);
 
         sumAllFigure(5, 100);
     }
 
     //2.4.1. Сумма четных положительных элементов массива
-    public static void sumEvenPositiveElements(int size, int maxValueExclusion) {
+    public static int sumEvenPositiveElements(int size, int maxValueExclusion) {
         int[] array = arrayRandom(size, maxValueExclusion);
         int sum = 0;
         System.out.println("Массив состоит из следующих элементов: ");
@@ -43,10 +45,11 @@ public class Array24 {
         }
         System.out.println();
         System.out.println("Сумма четных положительных элементов равна: " + sum);
+        return sum;
     }
 
     //2.4.2. Максимальный из элементов массива с четными индексами
-    public static void maxElementWithOvenIndex(int size, int maxValueExclusion) {
+    public static int maxElementWithOvenIndex(int size, int maxValueExclusion) {
         int[] array = arrayRandom(size, maxValueExclusion);
         System.out.println("Массив состоит из следующих элементов: ");
         for (int i : array) {
@@ -61,10 +64,11 @@ public class Array24 {
         }
         System.out.println();
         System.out.println("Максимальный из элементов массива с четными индексами равен: " + result);
+        return result;
     }
 
     //2.4.3. Элементы массива, которые меньше среднего арифметического
-    public static void elementsLessMiddle(int size, int maxValueExclusion) {
+    public static List<Integer> elementsLessMiddle(int size, int maxValueExclusion) {
         int[] array = arrayRandom(size, maxValueExclusion);
         int sum = 0;
         int arithMean;
@@ -76,13 +80,18 @@ public class Array24 {
         System.out.println();
         arithMean = sum / array.length;
         System.out.println("Элементы массива, которые меньше среднего арифметического (" + arithMean + "): ");
+        List<Integer> list = new ArrayList<>();
         for (int i : array) {
-            if (i < arithMean) System.out.print(i + " ");
+            if (i < arithMean) {
+                System.out.print(i + " ");
+                list.add(i);
+            }
         }
+        return list;
     }
 
     //2.4.4. Найти два наименьших (минимальных) элемента массива
-    public static void searchTwoMinElements(int size, int maxValueExclusion) {
+    public static int[] searchTwoMinElements(int size, int maxValueExclusion) {
         int[] array = arrayRandom(size, maxValueExclusion);
         System.out.println("Массив состоит из следующих элементов: ");
         for (int i : array) {
@@ -102,13 +111,17 @@ public class Array24 {
                 min2 = array[j];
             }
         }
+        int[] result = new int[2];
         System.out.println();
+        result[0] = min1;
+        result[1] = min2;
         System.out.println("Первое минимальное число :" + min1);
         System.out.println("Второе минимальное число :" + min2);
+        return result;
     }
 
     //2.4.5. Сжать массив, удалив элементы, принадлежащие интервалу
-    public static void arrayCompression(int size, int maxValueExclusion) {
+    public static int [] arrayCompression(int size, int maxValueExclusion) {
         int[] array = arrayRandom(size, maxValueExclusion);
         System.out.println("Массив состоит из следующих элементов: ");
         for (int i : array) {
@@ -133,10 +146,11 @@ public class Array24 {
         for (int i : array) {
             System.out.print(i + " ");
         }
+        return array;
     }
 
     //2.4.6. Сумма цифр массива
-    public static void sumAllFigure(int size, int maxValueExclusion) {
+    public static int sumAllFigure(int size, int maxValueExclusion) {
         int[] array = arrayRandom(size, maxValueExclusion);
         System.out.println("Массив имеет следующий вид: ");
         int sum = 0;
@@ -151,6 +165,7 @@ public class Array24 {
         }
         System.out.println();
         System.out.println("Сумма всех цифр массива равна: " + sum);
+        return sum;
     }
 }
 
