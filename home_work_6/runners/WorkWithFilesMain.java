@@ -2,6 +2,7 @@ package home_work_6.runners;
 
 import home_work_6.search.RegExSearch;
 import home_work_6.utils.FileHandler;
+import home_work_6.utils.Trimmer;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -33,7 +34,7 @@ public class WorkWithFilesMain {
         String fileName = scanner.nextLine();
         fileName = directoryPath + "\\" + fileName;
         String text = FileHandler.parseFileToString(fileName);
-        searchWordAndWriteInFile(fileName, text);
+        searchWordAndWriteInFile(fileName, text, files);
 
     }
 
@@ -42,14 +43,12 @@ public class WorkWithFilesMain {
      * @param fileName название файла, где искали текст, чтобы потом записать его в файл с результатами
      * @param text строка, в которую было записано содержимое файла
      */
-    public static void searchWordAndWriteInFile(String fileName, String text) {
+    public static void searchWordAndWriteInFile(String fileName, String text, String[] files) {
         String word;
         Scanner scanner = new Scanner(System.in);
         RegExSearch regExSearch = new RegExSearch();
         long numberOfWords;
-        BufferedWriter outWriter;
-        try {
-            outWriter = new BufferedWriter(new FileWriter("result.txt", true));
+        try (BufferedWriter outWriter = new BufferedWriter(new FileWriter("result.txt", true))){
             String note;
             do {
                 System.out.println("Введите слово, которое хотите найти в файле");
@@ -58,8 +57,7 @@ public class WorkWithFilesMain {
                 numberOfWords = regExSearch.search(text, word);
                 if (!Objects.equals("f", word)) {
                     System.out.println(String.format("Слово '%s' повторяется %d раз", word, numberOfWords));
-                    note = fileName + " – " + word + " – " + numberOfWords;
-
+                    note = Trimmer.trimPath(fileName, files) + " – " + word + " – " + numberOfWords;
                     if (numberOfWords >= 0) {
                         outWriter.newLine();
                         outWriter.write(note);
@@ -69,7 +67,6 @@ public class WorkWithFilesMain {
                 }
             } while (!Objects.equals("f", word));
             outWriter.flush();
-            outWriter.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
