@@ -11,9 +11,10 @@
 	[4.2] класс RegExSearch находится в пакете search.
 	[4.3] класс SearchEnginePunctuationNormalizer находится в пакете decorators, который 
 	лежит в пакете search.
-	[4.4] класс SearchWithoutCase находится в пакете decorators, который 
+	[4.4] класс SearchWithoutCase находится пакете decorators, который
 	лежит в пакете search.
 [5] Пятое задание выполняет класс SearchDecoratorsMain, который лежит в пакете runners.
 [7] Седьмое задание выполняется в классе WorkWithFilesMain, который лежит в пакете 
 	runners. В папке books находятся книги, но их всего лишь 11, так как 100 книг 
 	было сложно набрать.
+[8] Восьмое задание выполняется в классе ThreadMain, который лежит в пакете runners.
