@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class DownLoadPageUtil {
+public class DownloadPageUtil {
 
     public static String downLoadPage(String queryAddress) {
 
