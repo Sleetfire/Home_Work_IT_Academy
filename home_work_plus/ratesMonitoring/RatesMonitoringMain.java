@@ -1,56 +1,49 @@
 package home_work_plus.ratesMonitoring;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Arrays;
+import home_work_plus.ratesMonitoring.dto.HTMLCodeContainer;
+import home_work_plus.ratesMonitoring.runnable.DownLoadRunnableJob;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RatesMonitoringMain {
     public static void main(String[] args) {
-        String query = "https://myfin.by/currency/torgi-na-bvfb";
+        String query = "https://banki24.by/exchange/currencymarket";
+        HTMLCodeContainer container = new HTMLCodeContainer();
 
-        HttpURLConnection connection = null;
+        ExecutorService service = Executors.newSingleThreadExecutor();
+        service.submit(new DownLoadRunnableJob(query, container));
+        service.shutdown();
+        String page = container.getHTMLCode();
 
-        Pattern pattern = Pattern.compile("/(<([^>]+)>)/ig");
 
-        StringBuffer stringBuffer = new StringBuffer();
+        Pattern pattern0 = Pattern.compile("<p class=\"text-center h1 mt-0\">");
+        Pattern pattern1 =  Pattern.compile("<span class=\"glyphicon glyphicon-arrow-up text-success\" aria-hidden=\"true\"></span>");
+        String firstBorder = "<p class=\"text-center h1 mt-0\">";
+        String secondBorder = "<span class=\"glyphicon glyphicon-arrow-up text-success\" aria-hidden=\"true\"></span>";
 
-        try {
-
-            connection = (HttpURLConnection) new URL(query).openConnection();
-            connection.setRequestMethod("GET");
-            connection.setUseCaches(false);
-            connection.setConnectTimeout(250);
-            connection.setReadTimeout(250);
-            connection.connect();
-
-            if (HttpURLConnection.HTTP_OK == connection.getResponseCode()) {
-                try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-                    String line;
-                    while ((line = in.readLine()) != null) {
-                        stringBuffer.append(line);
-                        stringBuffer.append("\n");
-                    }
-                    System.out.println(stringBuffer);
-                } catch (IOException ignored) {
-                    ignored.printStackTrace();
-                }
-            } else {
-                System.err.println("fail: " + connection.getResponseCode() + ", " + connection.getResponseMessage());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
+        List<String> list = new ArrayList<>();
+        String test = "<p class=\"text-center h1 mt-0\"> 10 <span class=\"glyphicon glyphicon-arrow-up text-success\" aria-hidden=\"true\"></span>";
+        Pattern pattern = Pattern.compile("(?<=" + firstBorder + ")(.*?)(?=" + secondBorder + ")", Pattern.UNICODE_CASE);
+        Matcher matcher = pattern.matcher(page);
+        while (matcher.find()) {
+            list.add(page.substring(matcher.start(), matcher.end()).trim());
         }
 
-        String[] strArray = stringBuffer.toString().split(" /(<([^>]+)>)/ig");
-        System.out.println(Arrays.toString(strArray));
+        double changeCurse = 0.0;
+        LocalDateTime date = LocalDateTime.now();
+        System.out.println("1 USD\n" + list.get(0) + " BYN\n" + changeCurse + "\n" + date);
+
+        System.out.println(list);
+
+
+
+
 
     }
 }
