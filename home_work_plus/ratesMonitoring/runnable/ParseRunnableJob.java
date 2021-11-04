@@ -2,17 +2,26 @@ package home_work_plus.ratesMonitoring.runnable;
 
 import home_work_plus.ratesMonitoring.dto.CoursesContainer;
 import home_work_plus.ratesMonitoring.dto.HTMLCodeContainer;
+import home_work_plus.ratesMonitoring.utils.ParserUtil;
 
-public class ParseRunnableJob implements Runnable{
+import java.util.List;
+
+public class ParseRunnableJob implements Runnable {
 
     private String firstBorder;
     private String secondBorder;
+    private String firstChangeBorder;
+    private String secondChangeBorder;
+
     private HTMLCodeContainer htmlCodeContainer;
     private CoursesContainer coursesContainer;
 
-    public ParseRunnableJob(String firstBorder, String secondBorder, HTMLCodeContainer htmlCodeContainer, CoursesContainer coursesContainer) {
+    public ParseRunnableJob(String firstBorder, String secondBorder, String firstChangeBorder, String secondChangeBorder,
+                            HTMLCodeContainer htmlCodeContainer, CoursesContainer coursesContainer) {
         this.firstBorder = firstBorder;
         this.secondBorder = secondBorder;
+        this.firstChangeBorder = firstChangeBorder;
+        this.secondChangeBorder = secondChangeBorder;
         this.htmlCodeContainer = htmlCodeContainer;
         this.coursesContainer = coursesContainer;
     }
@@ -20,6 +29,15 @@ public class ParseRunnableJob implements Runnable{
     @Override
     public void run() {
 
+        List<String> list = ParserUtil.parseByBorders(htmlCodeContainer.getHTMLCode(), firstBorder, secondBorder);
+        coursesContainer.setUsdCourse(list.get(0));
+        coursesContainer.setEurCourse(list.get(1));
+        coursesContainer.setRubCourse(list.get(2));
+        List<String> listChange = ParserUtil.parseByBorders(htmlCodeContainer.getHTMLCode(), firstChangeBorder, secondChangeBorder);
+        ParserUtil.parseNumber(listChange);
+        coursesContainer.setChangeUsdCourse(listChange.get(0));
+        coursesContainer.setChangeEurCourse(listChange.get(1));
+        coursesContainer.setChangeRubCourse(listChange.get(1));
 
     }
 }
