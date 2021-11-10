@@ -27,11 +27,11 @@ public class RatesMonitoringMain {
 
         ScheduledExecutorService service2 = Executors.newScheduledThreadPool(1);
         service2.scheduleAtFixedRate(new ParseRunnableJob(firstBorder, secondBorder, firstBorderChange, secondBorderChange,
-                container, coursesContainer), 1, 60,TimeUnit.SECONDS);
+                container, coursesContainer), 2, 60,TimeUnit.SECONDS);
         //service2.shutdown();
 
         ScheduledExecutorService service3 = Executors.newScheduledThreadPool(1);
-        service3.scheduleAtFixedRate(new ConsolePrintRunnableJob(coursesContainer), 2,60, TimeUnit.SECONDS);
+        service3.scheduleAtFixedRate(new ConsolePrintRunnableJob(coursesContainer), 3,60, TimeUnit.SECONDS);
         //service3.shutdown();
 
     }

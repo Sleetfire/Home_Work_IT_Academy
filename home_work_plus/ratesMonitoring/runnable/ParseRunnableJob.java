@@ -3,8 +3,6 @@ package home_work_plus.ratesMonitoring.runnable;
 import home_work_plus.ratesMonitoring.dto.CoursesContainer;
 import home_work_plus.ratesMonitoring.dto.HTMLCodeContainer;
 import home_work_plus.ratesMonitoring.parsers.StringParser;
-import home_work_plus.ratesMonitoring.parsers.api.IParser;
-import home_work_plus.ratesMonitoring.utils.ParserUtil;
 
 import java.util.List;
 
@@ -31,21 +29,19 @@ public class ParseRunnableJob implements Runnable {
     @Override
     public void run() {
 
-        IParser<String> parser = new StringParser();
-
+        StringParser parser = new StringParser();
 
         List<String> list = parser.parseByBorders(htmlCodeContainer.getHTMLCode(), firstBorder, secondBorder);
         List<String> listChange = parser.parseByBorders(htmlCodeContainer.getHTMLCode(), firstChangeBorder, secondChangeBorder);
 
+        coursesContainer.setUsdCourse(list.get(0));
+        coursesContainer.setEurCourse(list.get(1));
+        coursesContainer.setRubCourse(list.get(2));
 
-            coursesContainer.setUsdCourse(list.get(0));
-            coursesContainer.setEurCourse(list.get(1));
-            coursesContainer.setRubCourse(list.get(2));
-
-            ParserUtil.parseNumber(listChange);
-            coursesContainer.setChangeUsdCourse(listChange.get(0));
-            coursesContainer.setChangeEurCourse(listChange.get(2));
-            coursesContainer.setChangeRubCourse(listChange.get(4));
+        parser.parseNumber(listChange);
+        coursesContainer.setChangeUsdCourse(listChange.get(0));
+        coursesContainer.setChangeEurCourse(listChange.get(2));
+        coursesContainer.setChangeRubCourse(listChange.get(4));
 
     }
 }

@@ -6,7 +6,7 @@ import home_work_plus.ratesMonitoring.printers.api.IPrinter;
 
 import java.util.Objects;
 
-public class ConsolePrintRunnableJob implements Runnable{
+public class ConsolePrintRunnableJob implements Runnable {
 
     private CoursesContainer container;
     private CoursesContainer oldContainer;
@@ -19,8 +19,7 @@ public class ConsolePrintRunnableJob implements Runnable{
     public void run() {
         IPrinter printer = new ConsolePrinter();
 
-
-        if(!Objects.equals(container, oldContainer)) {
+        if (!Objects.equals(container, oldContainer)) {
             System.err.println(printer.printInfo(container.getUsdCourse(), container.getChangeUsdCourse(), "USD"));
             System.err.println("______________");
             System.err.println(printer.printInfo(container.getEurCourse(), container.getChangeEurCourse(), "EUR"));
@@ -29,6 +28,6 @@ public class ConsolePrintRunnableJob implements Runnable{
         } else {
             System.err.println("Курс остался таким же!");
         }
-                oldContainer = container;
+        oldContainer = container;
     }
 }
