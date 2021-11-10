@@ -27,7 +27,6 @@ public class DownloadPageUtil {
                     while ((line = in.readLine()) != null) {
                         stringBuffer.append(line);
                     }
-                    System.out.println(stringBuffer);
                 } catch (IOException ignored) {
                     throw new IOException();
                 }

@@ -1,28 +1,34 @@
 package home_work_plus.ratesMonitoring.runnable;
 
 import home_work_plus.ratesMonitoring.dto.CoursesContainer;
-import home_work_plus.ratesMonitoring.utils.ConsolePrintUtil;
+import home_work_plus.ratesMonitoring.printers.ConsolePrinter;
+import home_work_plus.ratesMonitoring.printers.api.IPrinter;
+
+import java.util.Objects;
 
 public class ConsolePrintRunnableJob implements Runnable{
 
     private CoursesContainer container;
-    private Object lock;
+    private CoursesContainer oldContainer;
 
-    public ConsolePrintRunnableJob(CoursesContainer container, Object lock) {
+    public ConsolePrintRunnableJob(CoursesContainer container) {
         this.container = container;
-        this.lock = lock;
     }
 
     @Override
     public void run() {
+        IPrinter printer = new ConsolePrinter();
 
-        synchronized (lock) {
-            System.err.println(ConsolePrintUtil.printInfoInConsole(container.getUsdCourse(), container.getChangeUsdCourse(), "USD"));
+
+        if(!Objects.equals(container, oldContainer)) {
+            System.err.println(printer.printInfo(container.getUsdCourse(), container.getChangeUsdCourse(), "USD"));
             System.err.println("______________");
-            System.err.println(ConsolePrintUtil.printInfoInConsole(container.getEurCourse(), container.getChangeEurCourse(), "EUR"));
+            System.err.println(printer.printInfo(container.getEurCourse(), container.getChangeEurCourse(), "EUR"));
             System.err.println("______________");
-            System.err.println(ConsolePrintUtil.printInfoInConsole(container.getRubCourse(), container.getChangeRubCourse(), "RUB"));
+            System.err.println(printer.printInfo(container.getRubCourse(), container.getChangeRubCourse(), "RUB"));
+        } else {
+            System.err.println("Курс остался таким же!");
         }
-
+                oldContainer = container;
     }
 }

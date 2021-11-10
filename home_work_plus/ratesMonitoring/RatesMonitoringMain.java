@@ -5,70 +5,34 @@ import home_work_plus.ratesMonitoring.dto.HTMLCodeContainer;
 import home_work_plus.ratesMonitoring.runnable.ConsolePrintRunnableJob;
 import home_work_plus.ratesMonitoring.runnable.DownloadRunnableJob;
 import home_work_plus.ratesMonitoring.runnable.ParseRunnableJob;
-import home_work_plus.ratesMonitoring.utils.ConsolePrintUtil;
-import home_work_plus.ratesMonitoring.utils.ParserUtil;
 
-import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class RatesMonitoringMain {
     public static void main(String[] args) {
-        String query = "https://banki24.by/exchange/currencymarket";
+        String query = "https://myfin.by/currency/torgi-na-bvfb";
         HTMLCodeContainer container = new HTMLCodeContainer();
         CoursesContainer coursesContainer = new CoursesContainer();
-        Object lock = new Object();
 
-        String firstBorder = "<p class=\"text-center h1 mt-0\">";
-        String secondBorder = "<span class=\"glyphicon glyphicon-arrow-down text-danger\" aria-hidden=\"true\"></span>";
-        String firstBorderChange = "<span class=\"text-danger glyphicon glyphicon-arrow-down\">";
-        String secondBorderChange = "</span> ";
+        String firstBorder = "<div class=\"currency-detailed-change-card__value\"><span>";
+        String secondBorder = "</span></div>";
+        String firstBorderChange = "<div class=\"currency-detailed-change-card__changes-tile\">";
+        String secondBorderChange = "</div>";
 
+        ScheduledExecutorService service1 = Executors.newScheduledThreadPool(1);
+        service1.scheduleAtFixedRate(new DownloadRunnableJob(query, container), 0, 60, TimeUnit.SECONDS);
+        //service1.shutdown();
 
+        ScheduledExecutorService service2 = Executors.newScheduledThreadPool(1);
+        service2.scheduleAtFixedRate(new ParseRunnableJob(firstBorder, secondBorder, firstBorderChange, secondBorderChange,
+                container, coursesContainer), 1, 60,TimeUnit.SECONDS);
+        //service2.shutdown();
 
-
-        Thread th1 = new Thread(new DownloadRunnableJob(query, container, lock));
-        Thread th2 = new Thread(new ParseRunnableJob(firstBorder, secondBorder, firstBorderChange, secondBorderChange,
-                container, coursesContainer, lock));
-        Thread th3 = new Thread(new ConsolePrintRunnableJob(coursesContainer, lock));
-
-        th1.start();
-
-
-        try {
-            th1.join();
-            System.out.println(th1.getId());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        th2.start();
-        try {
-            th2.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        th3.start();
-        try {
-            th3.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-        String page = container.getHTMLCode();
-
-        List<String> list = ParserUtil.parseByBorders(page, firstBorder, secondBorder);
-        List<String> listChange = ParserUtil.parseByBorders(page, firstBorderChange, secondBorderChange);
-        listChange = ParserUtil.parseNumber(listChange);
-
-        System.out.println(ConsolePrintUtil.printInfoInConsole(list.get(0), listChange.get(0), "USD"));
-        System.out.println("______________");
-        System.out.println( ConsolePrintUtil.printInfoInConsole(list.get(1), listChange.get(1), "EUR"));
-        System.out.println("______________");
-        System.out.println(ConsolePrintUtil.printInfoInConsole(list.get(2), listChange.get(2), "RUB"));
-
-        System.out.println(coursesContainer);
-
-
+        ScheduledExecutorService service3 = Executors.newScheduledThreadPool(1);
+        service3.scheduleAtFixedRate(new ConsolePrintRunnableJob(coursesContainer), 2,60, TimeUnit.SECONDS);
+        //service3.shutdown();
 
     }
 }

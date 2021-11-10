@@ -1,5 +1,7 @@
 package home_work_plus.ratesMonitoring.dto;
 
+import java.util.Objects;
+
 public class CoursesContainer {
 
     private String usdCourse;
@@ -68,5 +70,21 @@ public class CoursesContainer {
                 ", changeEurCourse='" + changeEurCourse + '\'' +
                 ", changeRubCourse='" + changeRubCourse + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CoursesContainer that = (CoursesContainer) o;
+        return Objects.equals(usdCourse, that.usdCourse) && Objects.equals(eurCourse, that.eurCourse) &&
+                Objects.equals(rubCourse, that.rubCourse) && Objects.equals(changeUsdCourse, that.changeUsdCourse) &&
+                Objects.equals(changeEurCourse, that.changeEurCourse) &&
+                Objects.equals(changeRubCourse, that.changeRubCourse);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(usdCourse, eurCourse, rubCourse, changeUsdCourse, changeEurCourse, changeRubCourse);
     }
 }

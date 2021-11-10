@@ -7,21 +7,17 @@ public class DownloadRunnableJob implements Runnable {
 
     private String queryAddress;
     private HTMLCodeContainer container;
-    private Object lock;
 
-    public DownloadRunnableJob(String queryAddress, HTMLCodeContainer container, Object lock) {
+    public DownloadRunnableJob(String queryAddress, HTMLCodeContainer container) {
         this.queryAddress = queryAddress;
         this.container = container;
-        this.lock = lock;
     }
 
     @Override
     public void run() {
 
-        synchronized (lock) {
             String page = DownloadPageUtil.downLoadPage(queryAddress);
             container.setHTMLCode(page);
-        }
 
     }
 }
