@@ -4,6 +4,7 @@ import home_work_plus.ratesMonitoring.dto.CoursesContainer;
 import home_work_plus.ratesMonitoring.dto.HTMLCodeContainer;
 import home_work_plus.ratesMonitoring.runnable.ConsolePrintRunnableJob;
 import home_work_plus.ratesMonitoring.runnable.DownloadRunnableJob;
+import home_work_plus.ratesMonitoring.runnable.FilePrintRunnableJob;
 import home_work_plus.ratesMonitoring.runnable.ParseRunnableJob;
 
 import java.util.concurrent.Executors;
@@ -27,11 +28,15 @@ public class RatesMonitoringMain {
 
         ScheduledExecutorService service2 = Executors.newScheduledThreadPool(1);
         service2.scheduleAtFixedRate(new ParseRunnableJob(firstBorder, secondBorder, firstBorderChange, secondBorderChange,
-                container, coursesContainer), 2, 60,TimeUnit.SECONDS);
+                container, coursesContainer), 2, 60, TimeUnit.SECONDS);
         //service2.shutdown();
 
         ScheduledExecutorService service3 = Executors.newScheduledThreadPool(1);
-        service3.scheduleAtFixedRate(new ConsolePrintRunnableJob(coursesContainer), 3,60, TimeUnit.SECONDS);
+        service3.scheduleAtFixedRate(new ConsolePrintRunnableJob(coursesContainer), 3, 60, TimeUnit.SECONDS);
+        //service3.shutdown();
+
+        ScheduledExecutorService service4 = Executors.newScheduledThreadPool(1);
+        service4.scheduleAtFixedRate(new FilePrintRunnableJob(coursesContainer), 3, 60, TimeUnit.SECONDS);
         //service3.shutdown();
 
     }

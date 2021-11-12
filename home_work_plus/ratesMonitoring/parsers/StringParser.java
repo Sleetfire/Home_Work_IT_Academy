@@ -1,7 +1,6 @@
 package home_work_plus.ratesMonitoring.parsers;
 
 import home_work_plus.ratesMonitoring.parsers.api.IParser;
-import home_work_plus.ratesMonitoring.utils.ParserUtil;
 
 import java.util.ArrayList;
 import java.util.List;
