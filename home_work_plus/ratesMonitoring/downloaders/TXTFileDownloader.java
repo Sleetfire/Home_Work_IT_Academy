@@ -14,12 +14,8 @@ public class TXTFileDownloader implements IDownloader {
         try {
             Path file = Path.of(address);
             str = Files.readString(file);
-        } catch (IOException e1) {
+        } catch (IOException | InvalidPathException | NullPointerException e1) {
             System.out.println(e1.getMessage());
-        } catch (InvalidPathException e2) {
-            System.out.println(e2.getMessage());
-        } catch (NullPointerException e3) {
-            System.out.println(e3.getMessage());
         }
         return str;
     }
