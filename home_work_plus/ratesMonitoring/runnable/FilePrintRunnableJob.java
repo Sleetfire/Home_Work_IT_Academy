@@ -8,7 +8,7 @@ import java.util.Objects;
 public class FilePrintRunnableJob implements Runnable {
 
     private CoursesContainer container;
-    private CoursesContainer oldContainer;
+    private CoursesContainer oldContainer = null;
 
     public FilePrintRunnableJob(CoursesContainer container) {
         this.container = container;
@@ -17,7 +17,7 @@ public class FilePrintRunnableJob implements Runnable {
     @Override
     public void run() {
         FilePrinter filePrinter = new FilePrinter("rates.txt");
-        if (Objects.equals(container, oldContainer)) {
+        if (!Objects.equals(container, oldContainer)) {
             filePrinter.printInfo(container.getUsdCourse(), container.getChangeUsdCourse(), "USD");
             filePrinter.printInfo(container.getEurCourse(), container.getChangeEurCourse(), "EUR");
             filePrinter.printInfo(container.getRubCourse(), container.getChangeRubCourse(), "RUB");
