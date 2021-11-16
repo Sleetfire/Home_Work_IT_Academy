@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 
 public class ConsoleDraftsMan implements IDraftsMan {
 
-    String[][] graph;
-    List<String> dataAndTimeList = new ArrayList<>();
+    private String[][] graph;
+    private final List<String> dataAndTimeList = new ArrayList<>();
 
     @Override
     public void draw(String info, String currency) {
@@ -33,9 +33,25 @@ public class ConsoleDraftsMan implements IDraftsMan {
                 .sorted((Comparator.reverseOrder()))
                 .collect(Collectors.toList());
 
-        graph = new String[numberList.size() + 2][numberList.size() + 7];
+        double oldNumber = -1;
+//        for (Double number : sortedNumberList) {
+//            if (number == oldNumber) {
+//                sortedNumberList.remove(number);
+//            }
+//            oldNumber = number;
+//        }
+
+        for (int i = 0; i < sortedNumberList.size(); i++) {
+            if (sortedNumberList.get(i) == oldNumber) {
+                sortedNumberList.remove(sortedNumberList.get(i));
+                i--;
+            }
+            oldNumber = sortedNumberList.get(i);
+        }
+
+        graph = new String[sortedNumberList.size() + 2][numberList.size() + 7];
         fillArrayByBlanks();
-        drawAxis(sortedNumberList);
+        drawAxis(sortedNumberList, numberList);
         addPointsToGraph(numberList, sortedNumberList);
     }
 
@@ -58,18 +74,24 @@ public class ConsoleDraftsMan implements IDraftsMan {
         int index2;
         for (Double number : numberList) {
             index1 = numberList.indexOf(number);
+            numberList.set(index1, (double) -1);
             index2 = sortedNumberList.indexOf(number);
             graph[index2][index1 + 2] = "*";
         }
     }
 
-    private void drawAxis(List<Double> sortedNumberList) {
-        for (int i = 0, j = 0; i < graph.length && j < sortedNumberList.size(); i++, j++) {
-            graph[j][0] = String.format("%.3f", sortedNumberList.get(j));
+    private void drawAxis(List<Double> sortedNumberList, List<Double> numberList) {
+
+        for (int i = 0; i < sortedNumberList.size(); i++) {
+            graph[i][0] = String.format("%.3f", sortedNumberList.get(i));
             graph[i][1] = "#";
-            graph[sortedNumberList.size()][i + 4] = "#";
-            graph[sortedNumberList.size() + 1][i + 4] = "" + (j);
         }
+
+        for (int j = 0; j < numberList.size(); j++) {
+            graph[sortedNumberList.size()][j + 4] = "#";
+            graph[sortedNumberList.size() + 1][j + 4] = "" + (j);
+        }
+
     }
 
     private void fillArrayByBlanks() {
@@ -100,7 +122,6 @@ public class ConsoleDraftsMan implements IDraftsMan {
             } catch (NumberFormatException e) {
                 System.out.println(e.getMessage());
             }
-
         }
         return numberList;
     }

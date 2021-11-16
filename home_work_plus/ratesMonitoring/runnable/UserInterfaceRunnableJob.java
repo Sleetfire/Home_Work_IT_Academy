@@ -10,22 +10,21 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class UserInterfaceRunnableJob implements Runnable{
+public class UserInterfaceRunnableJob implements Runnable {
     @Override
     public void run() {
         String query = "https://myfin.by/currency/torgi-na-bvfb";
         HTMLCodeContainer container = new HTMLCodeContainer();
         CoursesContainer coursesContainer = new CoursesContainer();
         ConsoleDraftsMan consoleDraftsMan = new ConsoleDraftsMan();
-
+        Scanner scanner = new Scanner(System.in);
+        int choice;
 
         String firstBorder = "<div class=\"currency-detailed-change-card__value\"><span>";
         String secondBorder = "</span></div>";
         String firstBorderChange = "<div class=\"currency-detailed-change-card__changes-tile\">";
         String secondBorderChange = "</div>";
 
-        Scanner scanner = new Scanner(System.in);
-        int choice;
         TXTFileDownloader fileDownloader = new TXTFileDownloader();
         System.out.println();
         System.out.println("Выберите вариант из списка:");
@@ -49,12 +48,16 @@ public class UserInterfaceRunnableJob implements Runnable{
             ScheduledExecutorService service4 = Executors.newScheduledThreadPool(1);
             service4.scheduleAtFixedRate(new FilePrintRunnableJob(coursesContainer), 3, 60, TimeUnit.SECONDS);
         } else if (choice == 2) {
+            System.out.println("Введите файл, откуда хотите прочитать файл");
+            System.out.print("Ввод: ");
+            String fileName = scanner.next();
+            String str = fileDownloader.downloadToString(fileName);
             System.out.println("Выберите валюту:\nUSD\nEUR\nRUB");
-
-            String str = fileDownloader.downloadToString("rates.txt");
-            String line = scanner.next();
-            consoleDraftsMan.draw(str, line);
+            String currency = scanner.next();
+            consoleDraftsMan.draw(str, currency);
             consoleDraftsMan.showGraph();
+        } else {
+            System.exit(1);
         }
     }
 }
