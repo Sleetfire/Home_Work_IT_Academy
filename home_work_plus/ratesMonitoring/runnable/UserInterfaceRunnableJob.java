@@ -28,10 +28,12 @@ public class UserInterfaceRunnableJob implements Runnable{
         int choice;
         TXTFileDownloader fileDownloader = new TXTFileDownloader();
         System.out.println();
+        System.out.println("Выберите вариант из списка:");
         System.out.println("__________Меню__________");
         System.out.println("1. Мониторинг биржи.");
         System.out.println("2. Просмотр исторических файлов.");
-        System.out.println("Выберите вариант из списка:");
+        System.out.print("Ввод: ");
+
         choice = scanner.nextInt();
         if (choice == 1) {
             ScheduledExecutorService service1 = Executors.newScheduledThreadPool(1);

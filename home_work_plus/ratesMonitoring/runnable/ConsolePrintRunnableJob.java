@@ -20,6 +20,7 @@ public class ConsolePrintRunnableJob implements Runnable {
         IPrinter printer = new ConsolePrinter();
 
         if (!Objects.equals(container, oldContainer)) {
+            System.err.println();
             System.err.println(printer.printInfo(container.getUsdCourse(), container.getChangeUsdCourse(), "USD"));
             System.err.println("______________");
             System.err.println(printer.printInfo(container.getEurCourse(), container.getChangeEurCourse(), "EUR"));

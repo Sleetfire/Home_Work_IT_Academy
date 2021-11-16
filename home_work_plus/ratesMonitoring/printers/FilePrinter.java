@@ -5,6 +5,7 @@ import home_work_plus.ratesMonitoring.printers.api.IPrinter;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class FilePrinter implements IPrinter {
 
@@ -20,7 +21,8 @@ public class FilePrinter implements IPrinter {
 
     @Override
     public String printInfo(String course, String change, String name) {
-        String info = name + "-" + course;
+        LocalDateTime dateTime = LocalDateTime.now();
+        String info = name + "-" + course + "-" + dateTime;
         try (BufferedWriter outWriter = new BufferedWriter(new FileWriter(fileName, true))) {
             outWriter.write(info);
             outWriter.newLine();
