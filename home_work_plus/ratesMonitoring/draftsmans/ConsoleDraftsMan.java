@@ -12,6 +12,12 @@ public class ConsoleDraftsMan implements IDraftsMan {
     private String[][] graph;
     private final List<String> dataAndTimeList = new ArrayList<>();
 
+    /**
+     * Метод, который рисует график и информацию к нему
+     *
+     * @param info     строка, из которой нужно достать информацию
+     * @param currency валюта, на основе которой формируем график и дополнительную информацию к нему
+     */
     @Override
     public void draw(String info, String currency) {
         String[] lines = splitByRegex(info, "\n");
@@ -20,12 +26,7 @@ public class ConsoleDraftsMan implements IDraftsMan {
         List<Double> sortedNumberList;
         stringList = searchByCurrency(lines, currency);
 
-        if (stringList.size() > 10) {
-            Collections.reverse(stringList);
-            stringList = stringList.stream()
-                    .limit(10)
-                    .collect(Collectors.toList());
-        }
+        stringList = reverseList(stringList);
         numberList = getCurrencyValues(stringList);
 
         getDateAndTime(stringList);
@@ -33,28 +34,33 @@ public class ConsoleDraftsMan implements IDraftsMan {
                 .sorted((Comparator.reverseOrder()))
                 .collect(Collectors.toList());
 
-        double oldNumber = -1;
-//        for (Double number : sortedNumberList) {
-//            if (number == oldNumber) {
-//                sortedNumberList.remove(number);
-//            }
-//            oldNumber = number;
-//        }
-
-        for (int i = 0; i < sortedNumberList.size(); i++) {
-            if (sortedNumberList.get(i) == oldNumber) {
-                sortedNumberList.remove(sortedNumberList.get(i));
-                i--;
-            }
-            oldNumber = sortedNumberList.get(i);
-        }
+        sortedNumberList = sortedNumberList.stream().distinct().collect(Collectors.toList());
 
         graph = new String[sortedNumberList.size() + 2][numberList.size() + 7];
-        fillArrayByBlanks();
+        fillArrayByBlanks(" ");
         drawAxis(sortedNumberList, numberList);
         addPointsToGraph(numberList, sortedNumberList);
     }
 
+    /**
+     * Метод, который переворачивает коллекцию
+     *
+     * @param stringList коллекция строк
+     * @return перевернутая коллекция строк
+     */
+    private List<String> reverseList(List<String> stringList) {
+        if (stringList.size() > 10) {
+            Collections.reverse(stringList);
+            stringList = stringList.stream()
+                    .limit(10)
+                    .collect(Collectors.toList());
+        }
+        return stringList;
+    }
+
+    /**
+     * Метод, который выводит график и информацию к нему в консоль
+     */
     public void showGraph() {
         for (String[] strings : graph) {
             System.out.println();
@@ -69,6 +75,12 @@ public class ConsoleDraftsMan implements IDraftsMan {
         }
     }
 
+    /**
+     * Метод, который добавляет точки в поле графика
+     *
+     * @param numberList       коллекция значений курсов
+     * @param sortedNumberList отсортированная по уменьшению коллекция значений курсов
+     */
     private void addPointsToGraph(List<Double> numberList, List<Double> sortedNumberList) {
         int index1;
         int index2;
@@ -80,6 +92,12 @@ public class ConsoleDraftsMan implements IDraftsMan {
         }
     }
 
+    /**
+     * Метод, который добавляет оси и подписи к ним
+     *
+     * @param sortedNumberList отсортированная по уменьшению коллекция значений курсов
+     * @param numberList       коллекция значений курсов
+     */
     private void drawAxis(List<Double> sortedNumberList, List<Double> numberList) {
 
         for (int i = 0; i < sortedNumberList.size(); i++) {
@@ -91,19 +109,37 @@ public class ConsoleDraftsMan implements IDraftsMan {
             graph[sortedNumberList.size()][j + 4] = "#";
             graph[sortedNumberList.size() + 1][j + 4] = "" + (j);
         }
-
     }
 
-    private void fillArrayByBlanks() {
+    /**
+     * Метод, который заполняет поле графика переданными в него элементами
+     *
+     * @param element строковый символ
+     */
+    private void fillArrayByBlanks(String element) {
         for (String[] value : graph) {
-            Arrays.fill(value, " ");
+            Arrays.fill(value, element);
         }
     }
 
+    /**
+     * Метод, который разбивает строку по переданному в него выражению
+     *
+     * @param line  строка, которую нужно разбить
+     * @param regex выражение, на основе которого будет происходить разбитие
+     * @return массив строк, которые получились в процессе разбиения
+     */
     private String[] splitByRegex(String line, String regex) {
         return line.split(regex);
     }
 
+    /**
+     * Метод, который ищет строки с нужной валютой, а потом добавляет их в коллекцию
+     *
+     * @param stringArray массив строк, в котором нужно найти строки с определенной валютой
+     * @param currency    валюта
+     * @return коллекцию со строками, внутри которых есть переданная валюта
+     */
     private List<String> searchByCurrency(String[] stringArray, String currency) {
         List<String> stringList = new ArrayList<>();
         for (String str : stringArray) {
@@ -114,6 +150,12 @@ public class ConsoleDraftsMan implements IDraftsMan {
         return stringList;
     }
 
+    /**
+     * Метод, который получает список значений курса валют
+     *
+     * @param stringList список со строками, внутри которых лежат значения курса валют
+     * @return список со значениями курса валют
+     */
     private List<Double> getCurrencyValues(List<String> stringList) {
         List<Double> numberList = new ArrayList<>();
         for (String s : stringList) {
@@ -126,12 +168,24 @@ public class ConsoleDraftsMan implements IDraftsMan {
         return numberList;
     }
 
+    /**
+     * Метод, который ищет в списке строк дату и время, а потом записывает их в свой список
+     *
+     * @param stringList список строк
+     */
     private void getDateAndTime(List<String> stringList) {
         for (String s : stringList) {
             dataAndTimeList.add(searchInfo(s, "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"));
         }
     }
 
+    /**
+     * Метод, который ищет в строке информацию, которая удовлетворяет переданному регулярному выражению
+     *
+     * @param str   строка, где надо найти информацию
+     * @param regex регулярное выражение, на основе которого будет производиться поиск
+     * @return найденная информация
+     */
     private String searchInfo(String str, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher;

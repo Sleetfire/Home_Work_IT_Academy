@@ -8,6 +8,13 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 
 public class TXTFileDownloader implements IDownloader {
+
+    /**
+     * Метод, который принимает адрес, чтобы скачать информацию и записать в строку
+     *
+     * @param address адрес
+     * @return строка с информацией
+     */
     @Override
     public String downloadToString(String address) {
         String str = null;

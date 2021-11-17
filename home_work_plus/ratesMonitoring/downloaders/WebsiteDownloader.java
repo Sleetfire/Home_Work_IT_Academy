@@ -9,6 +9,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class WebsiteDownloader implements IDownloader {
+
+    /**
+     * Метод, который принимает адрес, чтобы скачать информацию и записать в строку
+     *
+     * @param address адрес
+     * @return строка с информацией
+     */
     @Override
     public String downloadToString(String address) {
         HttpURLConnection connection = null;
