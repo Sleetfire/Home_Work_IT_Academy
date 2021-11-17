@@ -11,6 +11,7 @@ public class ConsoleDraftsMan implements IDraftsMan {
 
     private String[][] graph;
     private final List<String> dataAndTimeList = new ArrayList<>();
+    private List<Double> numberList;
 
     /**
      * Метод, который рисует график и информацию к нему
@@ -22,7 +23,7 @@ public class ConsoleDraftsMan implements IDraftsMan {
     public void draw(String info, String currency) {
         String[] lines = splitByRegex(info, "\n");
         List<String> stringList;
-        List<Double> numberList;
+
         List<Double> sortedNumberList;
         stringList = searchByCurrency(lines, currency);
 
@@ -34,12 +35,14 @@ public class ConsoleDraftsMan implements IDraftsMan {
                 .sorted((Comparator.reverseOrder()))
                 .collect(Collectors.toList());
 
-        sortedNumberList = sortedNumberList.stream().distinct().collect(Collectors.toList());
+        sortedNumberList = sortedNumberList.stream().
+                distinct().
+                collect(Collectors.toList());
 
         graph = new String[sortedNumberList.size() + 2][numberList.size() + 7];
         fillArrayByBlanks(" ");
-        drawAxis(sortedNumberList, numberList);
-        addPointsToGraph(numberList, sortedNumberList);
+        drawAxis(sortedNumberList);
+        addPointsToGraph(sortedNumberList);
     }
 
     /**
@@ -78,10 +81,9 @@ public class ConsoleDraftsMan implements IDraftsMan {
     /**
      * Метод, который добавляет точки в поле графика
      *
-     * @param numberList       коллекция значений курсов
      * @param sortedNumberList отсортированная по уменьшению коллекция значений курсов
      */
-    private void addPointsToGraph(List<Double> numberList, List<Double> sortedNumberList) {
+    private void addPointsToGraph(List<Double> sortedNumberList) {
         int index1;
         int index2;
         for (Double number : numberList) {
@@ -96,9 +98,8 @@ public class ConsoleDraftsMan implements IDraftsMan {
      * Метод, который добавляет оси и подписи к ним
      *
      * @param sortedNumberList отсортированная по уменьшению коллекция значений курсов
-     * @param numberList       коллекция значений курсов
      */
-    private void drawAxis(List<Double> sortedNumberList, List<Double> numberList) {
+    private void drawAxis(List<Double> sortedNumberList) {
 
         for (int i = 0; i < sortedNumberList.size(); i++) {
             graph[i][0] = String.format("%.3f", sortedNumberList.get(i));
@@ -157,15 +158,15 @@ public class ConsoleDraftsMan implements IDraftsMan {
      * @return список со значениями курса валют
      */
     private List<Double> getCurrencyValues(List<String> stringList) {
-        List<Double> numberList = new ArrayList<>();
+        List<Double> list = new ArrayList<>();
         for (String s : stringList) {
             try {
-                numberList.add(Double.parseDouble(searchInfo(s, "[0-9].[0-9]{4}")));
+                list.add(Double.parseDouble(searchInfo(s, "[0-9].[0-9]{4}")));
             } catch (NumberFormatException e) {
                 System.out.println(e.getMessage());
             }
         }
-        return numberList;
+        return list;
     }
 
     /**

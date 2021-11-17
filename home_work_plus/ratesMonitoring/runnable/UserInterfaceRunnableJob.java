@@ -53,6 +53,7 @@ public class UserInterfaceRunnableJob implements Runnable {
             String fileName = scanner.next();
             String str = fileDownloader.downloadToString(fileName);
             System.out.println("Выберите валюту:\nUSD\nEUR\nRUB");
+            System.out.print("Ввод: ");
             String currency = scanner.next();
             consoleDraftsMan.draw(str, currency);
             consoleDraftsMan.showGraph();

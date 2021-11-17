@@ -26,8 +26,6 @@ public class ConsolePrintRunnableJob implements Runnable {
             System.err.println(printer.printInfo(container.getEurCourse(), container.getChangeEurCourse(), "EUR"));
             System.err.println("______________");
             System.err.println(printer.printInfo(container.getRubCourse(), container.getChangeRubCourse(), "RUB"));
-        } else {
-            System.err.println("Курс остался таким же!");
         }
         oldContainer = container;
     }
