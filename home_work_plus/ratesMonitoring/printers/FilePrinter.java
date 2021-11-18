@@ -30,7 +30,7 @@ public class FilePrinter implements IPrinter {
     @Override
     public String printInfo(String course, String change, String name) {
         LocalDateTime dateTime = LocalDateTime.now();
-        String info = name + "-" + course + "-" + dateTime;
+        String info = name + "-" + course + "-" + change + "-" + dateTime;
         try (BufferedWriter outWriter = new BufferedWriter(new FileWriter(fileName, true))) {
             outWriter.write(info);
             outWriter.newLine();

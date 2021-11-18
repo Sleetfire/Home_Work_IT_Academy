@@ -12,6 +12,7 @@ public class ConsoleDraftsMan implements IDraftsMan {
     private String[][] graph;
     private final List<String> dataAndTimeList = new ArrayList<>();
     private List<Double> numberList;
+    private List<Double> currencyChanging;
 
     /**
      * Метод, который рисует график и информацию к нему
@@ -28,7 +29,9 @@ public class ConsoleDraftsMan implements IDraftsMan {
         stringList = searchByCurrency(lines, currency);
 
         stringList = reverseList(stringList);
-        numberList = getCurrencyValues(stringList);
+        numberList = getValues(stringList, "[2-9].[0-9]{3}");
+
+        currencyChanging = getValues(stringList, "[0].[0-9]{4}");
 
         getDateAndTime(stringList);
         sortedNumberList = numberList.stream()
@@ -79,6 +82,23 @@ public class ConsoleDraftsMan implements IDraftsMan {
     }
 
     /**
+     * Метод, который печатает таблицу значений в консоль
+     */
+    public void showInfo() {
+        Collections.reverse(currencyChanging);
+        String topBorder = "____________________________________________________";
+        System.out.println(topBorder);
+        System.out.println("| Индекс | Значение | Изменение |   Дата и время   |");
+        Collections.reverse(currencyChanging);
+        System.out.println(topBorder);
+        int count = Math.min(currencyChanging.size(), 10);
+        for (int i = 0; i < count; i++) {
+            System.out.println("|   " + i + "    |  " + numberList.get(i) + "  |   "+ currencyChanging.get(i) + "   | " + dataAndTimeList.get(i) + " |");
+            System.out.println(topBorder);
+        }
+    }
+
+    /**
      * Метод, который добавляет точки в поле графика
      *
      * @param sortedNumberList отсортированная по уменьшению коллекция значений курсов
@@ -86,9 +106,10 @@ public class ConsoleDraftsMan implements IDraftsMan {
     private void addPointsToGraph(List<Double> sortedNumberList) {
         int index1;
         int index2;
-        for (Double number : numberList) {
-            index1 = numberList.indexOf(number);
-            numberList.set(index1, (double) -1);
+        List<Double> bufNumberList = new ArrayList<>(numberList);
+        for (Double number : bufNumberList) {
+            index1 = bufNumberList.indexOf(number);
+            bufNumberList.set(index1, (double) -1);
             index2 = sortedNumberList.indexOf(number);
             graph[index2][index1 + 2] = "*";
         }
@@ -157,11 +178,11 @@ public class ConsoleDraftsMan implements IDraftsMan {
      * @param stringList список со строками, внутри которых лежат значения курса валют
      * @return список со значениями курса валют
      */
-    private List<Double> getCurrencyValues(List<String> stringList) {
+    private List<Double> getValues(List<String> stringList, String regex) {
         List<Double> list = new ArrayList<>();
         for (String s : stringList) {
             try {
-                list.add(Double.parseDouble(searchInfo(s, "[0-9].[0-9]{4}")));
+                list.add(Double.parseDouble(searchInfo(s, regex)));
             } catch (NumberFormatException e) {
                 System.out.println(e.getMessage());
             }

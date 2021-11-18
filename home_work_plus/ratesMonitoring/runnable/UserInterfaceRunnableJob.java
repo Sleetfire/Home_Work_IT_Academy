@@ -5,6 +5,8 @@ import home_work_plus.ratesMonitoring.draftsmans.ConsoleDraftsMan;
 import home_work_plus.ratesMonitoring.dto.CoursesContainer;
 import home_work_plus.ratesMonitoring.dto.HTMLCodeContainer;
 
+import java.util.Locale;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -19,6 +21,7 @@ public class UserInterfaceRunnableJob implements Runnable {
         ConsoleDraftsMan consoleDraftsMan = new ConsoleDraftsMan();
         Scanner scanner = new Scanner(System.in);
         int choice;
+        String inputStr = "Ввод: ";
 
         String firstBorder = "<div class=\"currency-detailed-change-card__value\"><span>";
         String secondBorder = "</span></div>";
@@ -31,32 +34,58 @@ public class UserInterfaceRunnableJob implements Runnable {
         System.out.println("__________Меню__________");
         System.out.println("1. Мониторинг биржи.");
         System.out.println("2. Просмотр исторических файлов.");
-        System.out.print("Ввод: ");
+        System.out.print(inputStr);
 
         choice = scanner.nextInt();
         if (choice == 1) {
             ScheduledExecutorService service1 = Executors.newScheduledThreadPool(1);
-            service1.scheduleAtFixedRate(new DownloadRunnableJob(query, container), 0, 60, TimeUnit.SECONDS);
+            service1.scheduleAtFixedRate(new DownloadRunnableJob(query, container), 0, 60,
+                    TimeUnit.SECONDS);
 
             ScheduledExecutorService service2 = Executors.newScheduledThreadPool(1);
-            service2.scheduleAtFixedRate(new ParseRunnableJob(firstBorder, secondBorder, firstBorderChange, secondBorderChange,
-                    container, coursesContainer), 2, 60, TimeUnit.SECONDS);
+            service2.scheduleAtFixedRate(new ParseRunnableJob(firstBorder, secondBorder, firstBorderChange,
+                    secondBorderChange, container, coursesContainer), 2, 60, TimeUnit.SECONDS);
 
             ScheduledExecutorService service3 = Executors.newScheduledThreadPool(1);
-            service3.scheduleAtFixedRate(new ConsolePrintRunnableJob(coursesContainer), 3, 60, TimeUnit.SECONDS);
+            service3.scheduleAtFixedRate(new ConsolePrintRunnableJob(coursesContainer), 3, 60,
+                    TimeUnit.SECONDS);
 
             ScheduledExecutorService service4 = Executors.newScheduledThreadPool(1);
-            service4.scheduleAtFixedRate(new FilePrintRunnableJob(coursesContainer), 3, 60, TimeUnit.SECONDS);
+            service4.scheduleAtFixedRate(new FilePrintRunnableJob(coursesContainer), 3, 60,
+                    TimeUnit.SECONDS);
+
         } else if (choice == 2) {
-            System.out.println("Введите файл, откуда хотите прочитать файл");
-            System.out.print("Ввод: ");
+            System.out.println("Введите файл, откуда хотите прочитать информацию");
+            System.out.print(inputStr);
             String fileName = scanner.next();
+
+            if (!fileName.contains(".txt")) {
+                fileName = fileName.concat(".txt");
+            }
+
             String str = fileDownloader.downloadToString(fileName);
-            System.out.println("Выберите валюту:\nUSD\nEUR\nRUB");
-            System.out.print("Ввод: ");
+            System.out.println("Выберите валюту: |USD| |EUR| |RUB|");
+            System.out.print(inputStr);
             String currency = scanner.next();
+            currency = currency.toUpperCase(Locale.ROOT);
+
+            if (!Objects.equals(currency, "USD") && !Objects.equals(currency, "EUR") &&
+                    !Objects.equals(currency, "RUB")) {
+                currency = "USD";
+            }
+
             consoleDraftsMan.draw(str, currency);
-            consoleDraftsMan.showGraph();
+            System.out.println("Вывести информацию таблицей(1) или графиком(2)?");
+            System.out.print(inputStr);
+            int answer = scanner.nextInt();
+
+            if (answer == 1) {
+                consoleDraftsMan.showInfo();
+            } else if (answer == 2) {
+                consoleDraftsMan.showGraph();
+            } else {
+                consoleDraftsMan.showInfo();
+            }
         } else {
             System.exit(1);
         }
