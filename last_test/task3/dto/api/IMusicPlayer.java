@@ -8,12 +8,14 @@ public interface IMusicPlayer {
 
     /**
      * Метод, который выдает список песен
+     *
      * @return список песен
      */
     List<Song> getSongs();
 
     /**
      * Метод, который выдает песню по индексу
+     *
      * @param index индекс песни
      * @return песня
      */
