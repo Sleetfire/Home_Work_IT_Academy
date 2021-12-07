@@ -38,15 +38,18 @@ public class GameField {
                 sum1 += field[i][j];
                 sum2 += field[j][i];
             }
-            sum3 += field[i][i];
-            sum4 += field[z][i];
-            z--;
             if (sum1 == positiveCount || sum1 == negativeCount) {
                 result = sum1;
                 break;
             } else if (sum2 == positiveCount || sum2 == negativeCount) {
                 result = sum2;
             }
+            sum1 = 0;
+            sum2 = 0;
+            sum3 += field[i][i];
+            sum4 += field[z][i];
+            z--;
+
         }
         if (sum3 == positiveCount || sum3 == negativeCount) {
             result = sum3;
@@ -56,19 +59,35 @@ public class GameField {
         return result;
     }
 
-    public boolean isGameOver() {
-        return getResult() == 3 || getResult() == -3;
+    public String getWinner() {
+        String answer;
+        if (getResult() == field.length) {
+            answer = "Победили крестики";
+        } else if (getResult() == -field.length) {
+            answer = "Победили нолики";
+        } else {
+            answer = "Ничья";
+        }
+        return answer;
     }
 
-    public void putToField (int x, int y, int team) {
+    public boolean isGameOver() {
+        return getResult() == field.length || getResult() == -field.length;
+    }
+
+    public boolean putToField (Point point, int team) {
+        int x = point.getX();
+        int y = point.getY();
         if (x >= field.length || x < 0 || y >= field.length || y < 0) {
             System.out.println("Выход за пределы поля!");
-            return;
+            return false;
         }
         if (field[x][y] != 1 && field[x][y] != -1) {
             field[x][y] = team;
+            return true;
         } else {
             System.out.println("Занято!");
+            return false;
         }
     }
 }

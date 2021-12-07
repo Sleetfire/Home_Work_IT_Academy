@@ -1,7 +1,9 @@
 package home_work_plus.tic_tac_toe.api;
 
+import home_work_plus.tic_tac_toe.Point;
+
 public interface IPlayer {
 
-    void doStep (int fieldSize);
+    Point doStep (int fieldSize);
 
 }
